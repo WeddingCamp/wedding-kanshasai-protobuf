@@ -6,8 +6,7 @@ on:
       - develop
   pull_request:
     branches:
-      - main
-      - develop
+      - "*"
 
 jobs:
   validate-protobuf:
