@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package wedding_kanshasai_protobuf.v1;
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "WeddingKanshasai.ProtoBuf";
+
+service QuizService {
+  // クイズ一覧取得API
+  rpc ListQuizzes(google.protobuf.Empty) returns (ListQuizzesResponse);
+}
+
+enum QuizType {
+  // 未定義
+  QUIZ_TYPE_UNSPECIFIED = 0;
+  // 四択クイズ
+  QUIZ_TYPE_FOUR_CHOICES_QUIZ = 1;
+  // 画像並び替えクイズ
+  QUIZ_TYPE_SORT_IMAGE_QUIZ = 2;
+}
+
+// クイズオブジェクト
+message Quiz {
+  // 問題文
+  string body = 1;
+  // 問題種別
+  QuizType type = 2;
+
+  oneof test_oneof {
+    // 四択クイズの選択肢
+    FourChoices four_choices = 3;
+    // 画像並び替えクイズの選択肢
+    SortImageChoices sort_image_choices = 4;
+  }
+}
+
+// 四択クイズの選択肢
+message FourChoices {
+  // 選択肢1
+  string choice_1 = 1;
+  // 選択肢2
+  string choice_2 = 2;
+  // 選択肢3
+  string choice_3 = 3;
+  // 選択肢4
+  string choice_4 = 4;
+}
+
+message SortImageChoices {
+  // 選択肢1のURL
+  string image_url_1 = 1;
+  // 選択肢2のURL
+  string image_url_2 = 2;
+  // 選択肢3のURL
+  string image_url_3 = 3;
+  // 選択肢4のURL
+  string image_url_4 = 4;
+}
+
+// クイズ一覧
+message ListQuizzesResponse {
+  // クイズの配列
+  repeated Quiz quizzes = 1;
+}
