@@ -1,10 +1,13 @@
 syntax = "proto3";
 
-package wedding_kanshasai_protobuf.v1;
+package wedding.kanshasai.v1;
 
 import "google/protobuf/empty.proto";
 
-option csharp_namespace = "WeddingKanshasai.ProtoBuf";
+option csharp_namespace = "Wedding.Kanshasai.ProtoBuf";
+option java_multiple_files = true;
+option java_outer_classname = "QuizProto";
+option java_package = "wedding.kanshasai.v1";
 
 service QuizService {
   // クイズ一覧取得API
