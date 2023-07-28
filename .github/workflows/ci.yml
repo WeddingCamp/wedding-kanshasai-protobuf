@@ -15,16 +15,16 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v3
 
-      - name: Install buf command
-        env:
-          BIN: /usr/local/bin
-          VERSION: 1.25.0
-        run: |
-          curl -sSL "https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf-$(uname -s)-$(uname -m)" -o "${BIN}/buf"
-          chmod +x "${BIN}/buf"
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-      - name: Check lint
-        run: buf lint
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
 
-      - name: Check format
-        run: buf format --exit-code
+      - name: Check lint & format
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: bufLint bufFormatCheck
