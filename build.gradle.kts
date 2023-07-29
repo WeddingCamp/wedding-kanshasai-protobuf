@@ -61,6 +61,12 @@ publishing {
     }
 }
 
+tasks.register("printVersion") {
+    doLast {
+        println(project.version)
+    }
+}
+
 dependencies {
     api("com.google.protobuf:protobuf-kotlin:3.23.4")
     api("io.grpc:grpc-kotlin-stub:1.3.0")

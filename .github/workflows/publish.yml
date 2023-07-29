@@ -28,6 +28,38 @@ jobs:
         with:
           arguments: publish
 
+  publish-nuget-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3
+
+      - name: Setup dotnet 7.0.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "7.0.x"
+
+      - name: Apply version
+        run: sed -i -e "s/0\.0\.0-SNAPSHOT/$(./gradlew -q printVersion)/" WeddingKanshasaiProtoBuf.csproj
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build stub codes
+        run: dotnet build
+
+      - name: Prepare NuGet
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          NUGET_SOURCE: ${{ secrets.NUGET_SOURCE }}
+        run: nuget setapikey $NUGET_API_KEY -source $NUGET_SOURCE
+
+      - name: Publish to NuGet Repository
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          NUGET_SOURCE: ${{ secrets.NUGET_SOURCE }}
+        run: dotnet nuget push bin/Debug/*.nupkg --api-key $NUGET_API_KEY --source $NUGET_SOURCE
+
   deploy-document:
     permissions:
       pages: write
