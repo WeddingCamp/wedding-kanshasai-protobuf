@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package wedding.kanshasai.v1;
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "WeddingCamp.ProtoBuf";
+option java_multiple_files = true;
+option java_outer_classname = "SessionProto";
+option java_package = "wedding.kanshasai.v1";
+
+service SessionService {
+  // セッション開始
+  rpc StartSession(EventIdentifier) returns (Session);
+}
+
+message Session {}
+
+message EventIdentifier {}

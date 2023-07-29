@@ -5,4 +5,6 @@ breaking:
 lint:
   use:
     - DEFAULT
+    - PACKAGE_NO_IMPORT_CYCLE
+    - COMMENTS
   rpc_allow_google_protobuf_empty_requests: true
