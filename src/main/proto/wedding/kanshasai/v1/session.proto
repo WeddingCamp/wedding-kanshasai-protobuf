@@ -156,7 +156,7 @@ message SetCoverScreenRequest {
   // カバー画面種別
   CoverScreenType screen_type = 2;
   // カバー画面を表示するか
-  bool isVisible = 3;
+  bool is_visible = 3;
 }
 
 // カバー画面表示レスポンス
