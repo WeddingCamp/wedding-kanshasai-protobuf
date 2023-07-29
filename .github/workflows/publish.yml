@@ -27,3 +27,42 @@ jobs:
           ORG_GRADLE_PROJECT_mizucoffeeRepositoryPassword: ${{ secrets.MAVEN_PASSWORD }}
         with:
           arguments: publish
+
+  deploy-document:
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.20'
+
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v2
+
+      - name: Prepare Protoc gen doc
+        run: go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@latest
+
+      - name: Generate documents
+        run: |
+          protoc --doc_out=./doc --doc_opt=html,index.html --proto_path=src/main/proto/ src/main/proto/wedding/kanshasai/v1/*.proto
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v1
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './doc'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
