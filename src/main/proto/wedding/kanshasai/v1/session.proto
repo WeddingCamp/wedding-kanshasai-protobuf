@@ -59,18 +59,16 @@ message ListSessionQuizzesResponse {
   // 完了フラグを持ったクイズオブジェクト
   message SessionQuiz {
     // クイズID
-    string id = 1;
+    string quiz_id = 1;
 
-    // クイズの問題文
+    // クイズ問題文
     string body = 2;
 
-    // クイズの選択肢
-    oneof choices {
-      // 四択クイズの選択肢
-      FourChoices four_choices = 3;
-      // 画像並び替えクイズの選択肢
-      SortImageChoices sort_image_choices = 4;
-    }
+    // クイズ種別
+    QuizType quiz_type = 3;
+
+    // クイズ選択肢
+    repeated string choices = 4;
 
     // 完了済フラグ
     bool is_completed = 5;
