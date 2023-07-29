@@ -2,18 +2,18 @@ syntax = "proto3";
 
 package wedding.kanshasai.v1;
 
-import "google/protobuf/empty.proto";
-
 option csharp_namespace = "WeddingCamp.ProtoBuf";
 option java_multiple_files = true;
 option java_outer_classname = "QuizProto";
 option java_package = "wedding.kanshasai.v1";
 
+// クイズに対する基本的な操作を提供するサービス
 service QuizService {
   // クイズ一覧取得API
-  rpc ListQuizzes(google.protobuf.Empty) returns (ListQuizzesResponse);
+  rpc ListQuizzes(ListQuizzesRequest) returns (ListQuizzesResponse);
 }
 
+// クイズの種類
 enum QuizType {
   // 未定義
   QUIZ_TYPE_UNSPECIFIED = 0;
@@ -25,12 +25,14 @@ enum QuizType {
 
 // クイズオブジェクト
 message Quiz {
-  // 問題文
-  string body = 1;
-  // 問題種別
-  QuizType type = 2;
+  // クイズID
+  string id = 1;
 
-  oneof test_oneof {
+  // クイズの問題文
+  string body = 2;
+
+  // クイズの選択肢
+  oneof choices {
     // 四択クイズの選択肢
     FourChoices four_choices = 3;
     // 画像並び替えクイズの選択肢
@@ -50,6 +52,7 @@ message FourChoices {
   string choice_4 = 4;
 }
 
+// 画像並び替えクイズの選択肢
 message SortImageChoices {
   // 選択肢1のURL
   string image_url_1 = 1;
@@ -61,7 +64,12 @@ message SortImageChoices {
   string image_url_4 = 4;
 }
 
-// クイズ一覧
+// クイズ一覧リクエスト
+message ListQuizzesRequest {
+  // Empty
+}
+
+// クイズ一覧レスポンス
 message ListQuizzesResponse {
   // クイズの配列
   repeated Quiz quizzes = 1;
