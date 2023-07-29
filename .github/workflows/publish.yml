@@ -60,6 +60,53 @@ jobs:
           NUGET_SOURCE: ${{ secrets.NUGET_SOURCE }}
         run: dotnet nuget push bin/Debug/*.nupkg --api-key $NUGET_API_KEY --source $NUGET_SOURCE
 
+  publish-npm-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3
+
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v2
+
+      - name: Install protoc-gen-js
+        run: |
+          curl -Lo protobuf-javascript.zip https://github.com/protocolbuffers/protobuf-javascript/releases/download/v3.21.2/protobuf-javascript-3.21.2-linux-x86_64.zip
+          unzip -j protobuf-javascript.zip bin/protoc-gen-js -d /usr/local/bin
+          rm protobuf-javascript.zip
+          chmod +x /usr/local/bin/protoc-gen-js
+
+      - name: Install protoc-gen-grpc-web
+        run: |
+          curl -Lo protoc-gen-grpc-web https://github.com/grpc/grpc-web/releases/download/1.4.2/protoc-gen-grpc-web-1.4.2-linux-x86_64
+          mv protoc-gen-grpc-web /usr/local/bin/protoc-gen-grpc-web
+          chmod +x /usr/local/bin/protoc-gen-grpc-web
+
+      - name: Setup node 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Apply version
+        run: sed -i -e "s/0\.0\.0-SNAPSHOT/$(./gradlew -q printVersion)/" package.json
+
+      - name: Build stub codes
+        run: |
+          protoc -Isrc/main/proto/wedding/kanshasai/ --js_out=import_style=commonjs,binary:. --grpc-web_out=import_style=typescript,mode=grpcwebtext:. $(find src/main/proto -iname "*.proto")
+
+      - name: Publish to NPM Repository
+        env:
+          NPM_REGISTRY: ${{ secrets.NPM_REGISTRY }}
+          NPM_SECRET: ${{ secrets.NPM_SECRET }}
+        run: |
+          echo //$NPM_REGISTRY/:_auth=$NPM_SECRET >> .npmrc
+          echo registry=https://$NPM_REGISTRY/ >> .npmrc
+          echo always-auth=true >> .npmrc
+          npm publish
+
   deploy-document:
     permissions:
       pages: write
@@ -85,7 +132,7 @@ jobs:
 
       - name: Generate documents
         run: |
-          protoc --doc_out=./doc --doc_opt=html,index.html --proto_path=src/main/proto/ src/main/proto/wedding/kanshasai/v1/*.proto
+          protoc --doc_out=./doc --doc_opt=html,index.html --proto_path=src/main/proto/ $(find src/main/proto -iname "*.proto")
 
       - name: Setup Pages
         uses: actions/configure-pages@v1
