@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish-nuget-package:
+  publish-maven-package:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
