@@ -4,7 +4,7 @@ package wedding.kanshasai.v1;
 
 import "google/protobuf/empty.proto";
 
-option csharp_namespace = "Wedding.Kanshasai.ProtoBuf";
+option csharp_namespace = "WeddingCamp.ProtoBuf";
 option java_multiple_files = true;
 option java_outer_classname = "QuizProto";
 option java_package = "wedding.kanshasai.v1";
