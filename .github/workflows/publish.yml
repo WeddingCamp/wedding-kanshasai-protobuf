@@ -22,5 +22,8 @@ jobs:
 
       - name: Publish to maven
         uses: gradle/gradle-build-action@v2
+        env:
+          ORG_GRADLE_PROJECT_mizucoffeeRepositoryUsername: ${{ secrets.MAVEN_USERNAME }}
+          ORG_GRADLE_PROJECT_mizucoffeeRepositoryPassword: ${{ secrets.MAVEN_PASSWORD }}
         with:
           arguments: publish
