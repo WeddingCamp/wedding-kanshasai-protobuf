@@ -9,11 +9,17 @@ option java_package = "wedding.kanshasai.v1";
 
 // クイズに対する基本的な操作を提供するサービス
 service QuizService {
+  // クイズ作成
+  rpc CreateQuiz(CreateQuizRequest) returns (CreateQuizResponse);
+  // クイズ削除
+  rpc DeleteQuiz(DeleteQuizRequest) returns (DeleteQuizResponse);
+  // クイズ更新
+  rpc UpdateQuiz(UpdateQuizRequest) returns (UpdateQuizResponse);
   // クイズ一覧取得API
   rpc ListQuizzes(ListQuizzesRequest) returns (ListQuizzesResponse);
 }
 
-// クイズの種類
+// クイズ種別
 enum QuizType {
   // 未定義
   QUIZ_TYPE_UNSPECIFIED = 0;
@@ -23,45 +29,84 @@ enum QuizType {
   QUIZ_TYPE_SORT_IMAGE_QUIZ = 2;
 }
 
-// クイズオブジェクト
-message Quiz {
-  // クイズID
-  string id = 1;
+// クイズ作成リクエスト
+message CreateQuizRequest {
+  // クイズ問題文
+  string body = 1;
 
-  // クイズの問題文
+  // クイズ種別
+  QuizType quiz_type = 2;
+
+  // クイズ選択肢
+  repeated string choices = 3;
+
+  // クイズ正解データ
+  string correct_answer = 4;
+}
+
+// クイズ作成レスポンス
+message CreateQuizResponse {
+  // クイズID
+  string quiz_id = 1;
+
+  // クイズ問題文
   string body = 2;
 
-  // クイズの選択肢
-  oneof choices {
-    // 四択クイズの選択肢
-    FourChoices four_choices = 3;
-    // 画像並び替えクイズの選択肢
-    SortImageChoices sort_image_choices = 4;
-  }
+  // クイズ種別
+  QuizType quiz_type = 3;
+
+  // クイズ選択肢
+  repeated string choices = 4;
+
+  // クイズ正解データ
+  string correct_answer = 5;
 }
 
-// 四択クイズの選択肢
-message FourChoices {
-  // 選択肢1
-  string choice_1 = 1;
-  // 選択肢2
-  string choice_2 = 2;
-  // 選択肢3
-  string choice_3 = 3;
-  // 選択肢4
-  string choice_4 = 4;
+// クイズ削除リクエスト
+message DeleteQuizRequest {
+  // クイズID
+  string quiz_id = 1;
 }
 
-// 画像並び替えクイズの選択肢
-message SortImageChoices {
-  // 選択肢1のURL
-  string image_url_1 = 1;
-  // 選択肢2のURL
-  string image_url_2 = 2;
-  // 選択肢3のURL
-  string image_url_3 = 3;
-  // 選択肢4のURL
-  string image_url_4 = 4;
+// クイズ削除レスポンス
+message DeleteQuizResponse {
+  // Empty
+}
+
+// クイズ更新リクエスト
+message UpdateQuizRequest {
+  // クイズID
+  string quiz_id = 1;
+
+  // クイズ問題文
+  string body = 2;
+
+  // クイズ種別
+  QuizType quiz_type = 3;
+
+  // クイズ選択肢
+  repeated string choices = 4;
+
+  // クイズ正解データ
+  string correct_answer = 5;
+}
+
+// クイズ更新レスポンス
+message UpdateQuizResponse {
+  // クイズID
+  string quiz_id = 1;
+
+  // クイズ問題文
+  string body = 2;
+
+  // クイズ種別
+  QuizType quiz_type = 3;
+
+  // クイズ選択肢
+  repeated string choices = 4;
+
+  // クイズ正解データ
+  string correct_answer = 5;
 }
 
 // クイズ一覧リクエスト
@@ -71,6 +116,23 @@ message ListQuizzesRequest {
 
 // クイズ一覧レスポンス
 message ListQuizzesResponse {
+  // クイズオブジェクト
+  message Quiz {
+    // クイズID
+    string quiz_id = 1;
+
+    // クイズ問題文
+    string body = 2;
+
+    // クイズ種別
+    QuizType quiz_type = 3;
+
+    // クイズ選択肢
+    repeated string choices = 4;
+
+    // クイズ正解データ
+    string correct_answer = 5;
+  }
   // クイズの配列
   repeated Quiz quizzes = 1;
 }
