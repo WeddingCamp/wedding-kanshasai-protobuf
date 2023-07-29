@@ -1,0 +1,11 @@
+.github/
+bin
+obj
+*.csproj
+doc/
+.idea/
+gradle
+buf.worl.yaml
+*.kts
+*.properties
+gradlew*

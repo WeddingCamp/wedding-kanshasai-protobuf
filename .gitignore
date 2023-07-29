@@ -43,3 +43,5 @@ bin/
 
 doc/index.html
 obj/
+v*/*.ts
+v*/*.js
