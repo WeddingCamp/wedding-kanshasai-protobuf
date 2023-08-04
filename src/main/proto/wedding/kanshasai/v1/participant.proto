@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package wedding.kanshasai.v1;
 
+import "wedding/kanshasai/v1/quiz.proto";
+
 option csharp_namespace = "WeddingCamp.ProtoBuf";
 option java_multiple_files = true;
 option java_outer_classname = "ParticipantProto";
@@ -112,9 +114,71 @@ message StreamParticipantEventRequest {
   string participant_id = 1;
 }
 
+// 参加者クライアントに送られるイベント種別
+enum ParticipantEventType {
+  // 未定義
+  PARTICIPANT_EVENT_TYPE_UNSPECIFIED = 0;
+  // クイズ開始イベント（クイズや選択肢画像などをプリロードするためのイベント）
+  PARTICIPANT_EVENT_TYPE_PRE_QUIZ = 1;
+  // 回答開始イベント
+  PARTICIPANT_EVENT_TYPE_QUIZ_START = 2;
+  // 締め切りイベント
+  PARTICIPANT_EVENT_TYPE_TIME_UP = 3;
+  // 勝者イベント（来ない場合もある）
+  PARTICIPANT_EVENT_TYPE_WINNER = 4;
+}
+
 // 参加者向けイベントストリームレスポンス
 message StreamParticipantEventResponse {
-  // TODO
+  // イベント種別
+  ParticipantEventType event_type = 1;
+
+  // クイズ開始イベントBody
+  message PreQuizEventBody {
+    // クイズID
+    string quiz_id = 1;
+    // クイズ問題文
+    string body = 2;
+    // クイズ種別
+    QuizType quiz_type = 3;
+    // クイズ選択肢
+    repeated string choices = 4;
+  }
+
+  // 回答開始イベントBody（PreQuizで取得できていなくても動かせるよう全データを載せる）
+  message QuizStartEventBody {
+    // クイズID
+    string quiz_id = 1;
+    // クイズ問題文
+    string body = 2;
+    // クイズ種別
+    QuizType quiz_type = 3;
+    // クイズ選択肢
+    repeated string choices = 4;
+  }
+
+  // 締め切りイベントBody
+  message TimeUpEventBody {
+    // クイズID
+    string quiz_id = 1;
+  }
+
+  // 勝者イベントBody
+  message WinnerEventBody {
+    // Empty
+  }
+
+  // イベントBody
+  oneof event_body {
+    // クイズ開始イベントBody
+    PreQuizEventBody pre_quiz_event_body = 10;
+    // クイズ開始イベントBody
+    QuizStartEventBody quiz_start_event_body = 11;
+    // 締め切りイベントBody
+    TimeUpEventBody time_up_event_body = 12;
+    // 勝者イベントBody
+    WinnerEventBody winner_event_body = 13;
+  }
 }
 
 // 回答登録リクエスト
@@ -125,9 +189,11 @@ message SetAnswerRequest {
   string quiz_id = 2;
   // 回答データ
   string answer = 3;
+  // 回答までの時間
+  float time = 4;
 }
 
 // 回答登録レスポンス
 message SetAnswerResponse {
-  // TODO
+  // Empty
 }
