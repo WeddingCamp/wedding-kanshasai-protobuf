@@ -33,13 +33,10 @@ enum QuizType {
 message CreateQuizRequest {
   // クイズ問題文
   string body = 1;
-
   // クイズ種別
   QuizType quiz_type = 2;
-
   // クイズ選択肢
   repeated string choices = 3;
-
   // クイズ正解データ
   string correct_answer = 4;
 }
@@ -48,16 +45,12 @@ message CreateQuizRequest {
 message CreateQuizResponse {
   // クイズID
   string quiz_id = 1;
-
   // クイズ問題文
   string body = 2;
-
   // クイズ種別
   QuizType quiz_type = 3;
-
   // クイズ選択肢
   repeated string choices = 4;
-
   // クイズ正解データ
   string correct_answer = 5;
 }
@@ -77,16 +70,12 @@ message DeleteQuizResponse {
 message UpdateQuizRequest {
   // クイズID
   string quiz_id = 1;
-
   // クイズ問題文
   string body = 2;
-
   // クイズ種別
   QuizType quiz_type = 3;
-
   // クイズ選択肢
   repeated string choices = 4;
-
   // クイズ正解データ
   string correct_answer = 5;
 }
@@ -95,16 +84,12 @@ message UpdateQuizRequest {
 message UpdateQuizResponse {
   // クイズID
   string quiz_id = 1;
-
   // クイズ問題文
   string body = 2;
-
   // クイズ種別
   QuizType quiz_type = 3;
-
   // クイズ選択肢
   repeated string choices = 4;
-
   // クイズ正解データ
   string correct_answer = 5;
 }
@@ -120,19 +105,16 @@ message ListQuizzesResponse {
   message Quiz {
     // クイズID
     string quiz_id = 1;
-
     // クイズ問題文
     string body = 2;
-
     // クイズ種別
     QuizType quiz_type = 3;
-
     // クイズ選択肢
     repeated string choices = 4;
-
     // クイズ正解データ
     string correct_answer = 5;
   }
+
   // クイズの配列
   repeated Quiz quizzes = 1;
 }

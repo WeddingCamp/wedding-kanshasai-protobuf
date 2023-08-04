@@ -62,19 +62,16 @@ message ListSessionQuizzesResponse {
   message SessionQuiz {
     // クイズID
     string quiz_id = 1;
-
     // クイズ問題文
     string body = 2;
-
     // クイズ種別
     QuizType quiz_type = 3;
-
     // クイズ選択肢
     repeated string choices = 4;
-
     // 完了済フラグ
     bool is_completed = 5;
   }
+
   // クイズの配列
   repeated SessionQuiz quizzes = 1;
 }
