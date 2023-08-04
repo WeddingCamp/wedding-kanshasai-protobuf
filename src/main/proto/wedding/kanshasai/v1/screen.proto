@@ -1,0 +1,164 @@
+syntax = "proto3";
+
+package wedding.kanshasai.v1;
+
+import "wedding/kanshasai/v1/common.proto";
+import "wedding/kanshasai/v1/quiz.proto";
+
+option csharp_namespace = "WeddingCamp.ProtoBuf";
+option java_multiple_files = true;
+option java_outer_classname = "ScreenProto";
+option java_package = "wedding.kanshasai.v1";
+
+// スクリーンに関連する操作を提供するサービス
+service ScreenService {
+  // バックエンド/管理画面にメッセージ送信
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  // スクリーン向けイベントストリーム
+  rpc StreamScreenEvent(StreamScreenEventRequest) returns (stream StreamScreenEventResponse);
+}
+
+// メッセージ送信リクエスト
+message SendMessageRequest {
+  // セッションID
+  string session_id = 1;
+  // メッセージ本文
+  string body = 2;
+  // メッセージレベル
+  MessageLevel level = 3;
+}
+
+// メッセージ送信レスポンス
+message SendMessageResponse {
+  // Empty
+}
+
+// スクリーン向けイベント種別
+enum ScreenEventType {
+  // 未定義
+  SCREEN_EVENT_TYPE_UNSPECIFIED = 0;
+  // クイズ表示イベント
+  SCREEN_EVENT_TYPE_QUIZ = 1;
+  // クイズ開始イベント
+  SCREEN_EVENT_TYPE_QUIZ_START = 2;
+  // クイズ回答数表示イベント
+  SCREEN_EVENT_TYPE_QUIZ_ANSWER_LIST = 3;
+  // クイズ結果表示イベント
+  SCREEN_EVENT_TYPE_QUIZ_RESULT = 4;
+  // 早押し一位表示イベント
+  SCREEN_EVENT_TYPE_QUIZ_RESULT_FASTEST = 5;
+  // 中間結果表示イベント
+  SCREEN_EVENT_TYPE_INTERIM_RESULT = 6;
+  // 最終結果表示イベント
+  SCREEN_EVENT_TYPE_RESULT = 7;
+  // カバー画像表示イベント
+  SCREEN_EVENT_TYPE_COVER = 8;
+}
+
+// スクリーン向けイベントリクエスト
+message StreamScreenEventRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// スクリーン向けイベントレスポンス
+message StreamScreenEventResponse {
+  // イベント種別
+  ScreenEventType event_type = 1;
+
+  // クイズ表示/開始イベント
+  message QuizEvent {
+    // クイズID
+    string quiz_id = 1;
+    // クイズ問題文
+    string body = 2;
+    // クイズ種別
+    QuizType quiz_type = 3;
+    // クイズ選択肢
+    repeated string choices = 4;
+  }
+
+  // クイズ結果発表イベント
+  message QuizChoiceResultEvent {
+    // 選択肢の結果
+    message ChoiceResult {
+      // 選択肢ID
+      string choice_id = 1;
+      // 選択肢の内容
+      string choice = 2;
+      // 件数
+      string count = 3;
+    }
+
+    // 選択肢の結果の配列
+    repeated ChoiceResult choice_result_list = 1;
+  }
+
+  // クイズ結果発表イベント
+  message QuizResultEvent {
+    // 選択肢の結果
+    message ChoiceResult {
+      // 選択肢ID
+      string choice_id = 1;
+      // 選択肢の内容
+      string choice = 2;
+      // 件数
+      string count = 3;
+    }
+
+    // 選択肢の結果の配列
+    repeated ChoiceResult choice_result_list = 1;
+    // 正解の選択肢ID
+    string correct_choice_id = 2;
+  }
+
+  // 早押し一位表示イベント
+  message QuizTimeResultEvent {
+    // 参加者のスコア
+    message ParticipantQuizTime {
+      // 参加者名
+      string participant_name = 1;
+      // 参加者画像ID
+      string participant_image_id = 2;
+      // タイム
+      string time = 3;
+    }
+
+    // 参加者のスコアの配列
+    repeated ParticipantQuizTime participant_quiz_time_list = 1;
+  }
+
+  // 中間/最終結果発表イベント
+  message SessionResultEvent {
+    // 参加者のスコア
+    message ParticipantSessionScore {
+      // 参加者名
+      string participant_name = 1;
+      // 参加者画像ID
+      string participant_image_id = 2;
+      // スコア
+      string score = 3;
+    }
+
+    // 参加者のスコアの配列
+    repeated ParticipantSessionScore participant_session_score_list = 1;
+  }
+
+  // イベントBody
+  oneof event_body {
+    // クイズ表示イベントBody
+    QuizEvent quiz_event = 10;
+    // クイズ開始イベントBody
+    QuizEvent quiz_start_event = 11;
+    // クイズ回答数表示イベントBody
+    QuizChoiceResultEvent quiz_choice_result_event = 12;
+    // クイズ結果表示イベントBody
+    QuizResultEvent quiz_result_event = 13;
+    // 早押し一位表示イベントBody
+    QuizTimeResultEvent quiz_time_result_event = 14;
+    // 中間結果表示イベントBody
+    SessionResultEvent interim_result_event = 15;
+    // 最終結果表示イベントBody
+    SessionResultEvent result_event = 16;
+  }
+}

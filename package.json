@@ -1,0 +1,23 @@
+{
+  "name": "@wedding-camp/wedding-kanshasai-protobuf",
+  "version": "0.0.0-SNAPSHOT",
+  "description": "",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WeddingCamp/wedding-kanshasai-protobuf.git"
+  },
+  "author": "WeddingCamp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WeddingCamp/wedding-kanshasai-protobuf/issues"
+  },
+  "homepage": "https://github.com/WeddingCamp/wedding-kanshasai-protobuf#readme",
+  "dependencies": {
+    "google-protobuf": "^3.21.2",
+    "grpc-web": "^1.4.2"
+  },
+  "devDependencies": {
+    "@types/google-protobuf": "^3.15.6"
+  }
+}

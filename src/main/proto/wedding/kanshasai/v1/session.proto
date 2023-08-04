@@ -1,0 +1,225 @@
+syntax = "proto3";
+
+package wedding.kanshasai.v1;
+
+import "wedding/kanshasai/v1/quiz.proto";
+
+option csharp_namespace = "WeddingCamp.ProtoBuf";
+option java_multiple_files = true;
+option java_outer_classname = "SessionProto";
+option java_package = "wedding.kanshasai.v1";
+
+// セッション（開始〜クイズ複数回〜終了までの1セット）に関連する操作を提供するサービス
+// 基本的に司会が操作する機能を提供する
+service SessionService {
+  // セッション作成
+  rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse);
+  // セッションに紐づいたクイズ一覧
+  rpc ListSessionQuizzes(ListSessionQuizzesRequest) returns (ListSessionQuizzesResponse);
+  // クイズ選択
+  rpc SetNextQuiz(SetNextQuizRequest) returns (SetNextQuizResponse);
+  // クイズ開始（カウントダウンスタート）
+  rpc StartQuiz(StartQuizRequest) returns (StartQuizResponse);
+  // クイズ中止（このクイズに関連する情報を破棄）
+  rpc CancelCurrentQuiz(CancelCurrentQuizRequest) returns (CancelCurrentQuizResponse);
+  // クイズ結果画面表示
+  rpc ShowQuizResult(ShowQuizResultRequest) returns (ShowQuizResultResponse);
+  // カバー画面表示
+  rpc SetCoverScreen(SetCoverScreenRequest) returns (SetCoverScreenResponse);
+  // 結果画面表示
+  rpc ShowSessionResult(ShowSessionResultRequest) returns (ShowSessionResultResponse);
+  // 管理画面向けイベントストリーム
+  rpc StreamSessionEvent(StreamSessionEventRequest) returns (stream StreamSessionEventResponse);
+}
+
+// セッション作成リクエスト
+message CreateSessionRequest {
+  // セッション名
+  string name = 1;
+  // イベントID
+  string event_id = 2;
+}
+
+// セッション作成レスポンス
+message CreateSessionResponse {
+  // セッションID
+  string session_id = 1;
+  // セッション名
+  string name = 2;
+  // イベントID
+  string event_id = 3;
+}
+
+// クイズ一覧リクエスト
+message ListSessionQuizzesRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// クイズ一覧レスポンス
+message ListSessionQuizzesResponse {
+  // 完了フラグを持ったクイズオブジェクト
+  message SessionQuiz {
+    // クイズID
+    string quiz_id = 1;
+    // クイズ問題文
+    string body = 2;
+    // クイズ種別
+    QuizType quiz_type = 3;
+    // クイズ選択肢
+    repeated string choices = 4;
+    // 完了済フラグ
+    bool is_completed = 5;
+  }
+
+  // クイズの配列
+  repeated SessionQuiz quizzes = 1;
+}
+
+// クイズ選択リクエスト
+message SetNextQuizRequest {
+  // セッションID
+  string session_id = 1;
+  // クイズID
+  string quiz_id = 2;
+}
+
+// クイズ選択レスポンス
+message SetNextQuizResponse {
+  // Empty
+}
+
+// クイズ開始リクエスト
+message StartQuizRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// クイズ開始レスポンス
+message StartQuizResponse {
+  // Empty
+}
+
+// クイズ中止リクエスト
+message CancelCurrentQuizRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// クイズ中止レスポンス
+message CancelCurrentQuizResponse {
+  // Empty
+}
+
+// クイズの種類
+enum QuizResultScreenType {
+  // 未定義
+  QUIZ_RESULT_SCREEN_TYPE_UNSPECIFIED = 0;
+  // 投票数表示
+  QUIZ_RESULT_SCREEN_TYPE_VOTE_LIST = 1;
+  // 結果表示
+  QUIZ_RESULT_SCREEN_TYPE_RESULT = 2;
+}
+
+// クイズ結果画面表示リクエスト
+message ShowQuizResultRequest {
+  // セッションID
+  string session_id = 1;
+  // 表示したい結果表示画面の種類
+  QuizResultScreenType screen_type = 2;
+}
+
+// クイズ結果画面表示レスポンス
+message ShowQuizResultResponse {
+  // Empty
+}
+
+// カバー画面種別
+enum CoverScreenType {
+  // 未定義
+  COVER_SCREEN_TYPE_UNSPECIFIED = 0;
+  // ようこそスクリーン
+  COVER_SCREEN_TYPE_WELCOME = 1;
+  // ルール説明スクリーン
+  COVER_SCREEN_TYPE_RULE = 2;
+  // ふた絵スクリーン
+  COVER_SCREEN_TYPE_COVER = 9;
+}
+
+// カバー画面表示リクエスト
+message SetCoverScreenRequest {
+  // セッションID
+  string session_id = 1;
+  // カバー画面種別
+  CoverScreenType screen_type = 2;
+  // カバー画面を表示するか
+  bool is_visible = 3;
+}
+
+// カバー画面表示レスポンス
+message SetCoverScreenResponse {
+  // Empty
+}
+
+// 結果画面種別
+enum SessionResultScreenType {
+  // 未定義
+  SESSION_RESULT_SCREEN_TYPE_UNSPECIFIED = 0;
+  // スコア一覧スクリーン
+  SESSION_RESULT_SCREEN_TYPE_SCORE_LIST = 1;
+  // 勝者スクリーン
+  SESSION_RESULT_SCREEN_TYPE_WINNER = 2;
+}
+
+// 結果画面表示リクエスト
+message ShowSessionResultRequest {
+  // セッションID
+  string session_id = 1;
+  // 結果画面種別
+  SessionResultScreenType screen_type = 2;
+}
+
+// 結果画面表示レスポンス
+message ShowSessionResultResponse {
+  // Empty
+}
+
+// 管理画面向けイベント種別
+enum SessionEventType {
+  // 未定義
+  SESSION_EVENT_TYPE_UNSPECIFIED = 0;
+  // ERRORメッセージイベント
+  SESSION_EVENT_TYPE_ERROR_MESSAGE = 1;
+  // WARNメッセージイベント
+  SESSION_EVENT_TYPE_WARN_MESSAGE = 2;
+  // NOTICEメッセージイベント
+  SESSION_EVENT_TYPE_NOTICE_MESSAGE = 3;
+}
+
+// 管理画面向けストリームリクエスト
+message StreamSessionEventRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// 管理画面向けストリームレスポンス
+message StreamSessionEventResponse {
+  // イベント種別
+  SessionEventType event_type = 1;
+
+  // メッセージイベントBody
+  message MessageEventBody {
+    // メッセージ本文
+    string body = 1;
+  }
+
+  // イベントBody
+  oneof event_body {
+    // ERRORメッセージイベントボディ
+    MessageEventBody error_message_event_body = 10;
+    // WARNメッセージイベントボディ
+    MessageEventBody warn_message_event_body = 11;
+    // NOTICEメッセージイベントボディ
+    MessageEventBody notice_message_event_body = 12;
+  }
+}
