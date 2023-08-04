@@ -124,9 +124,11 @@ enum ParticipantEventType {
   // 回答開始イベント
   PARTICIPANT_EVENT_TYPE_QUIZ_START = 2;
   // 締め切りイベント
-  PARTICIPANT_EVENT_TYPE_TIME_UP = 3;
-  // 勝者イベント（来ない場合もある）
-  PARTICIPANT_EVENT_TYPE_WINNER = 4;
+  PARTICIPANT_EVENT_TYPE_QUIZ_TIME_UP = 3;
+  // クイズ結果イベント
+  PARTICIPANT_EVENT_TYPE_QUIZ_RESULT = 4;
+  // 勝者イベント
+  PARTICIPANT_EVENT_TYPE_WINNER = 5;
 }
 
 // 参加者向けイベントストリームレスポンス
@@ -159,9 +161,17 @@ message StreamParticipantEventResponse {
   }
 
   // 締め切りイベントBody
-  message TimeUpEventBody {
+  message QuizTimeUpEventBody {
     // クイズID
     string quiz_id = 1;
+  }
+
+  // クイズ結果イベントBody
+  message QuizResultEventBody {
+    // クイズID
+    string quiz_id = 1;
+    // 正解フラグ
+    bool is_correct = 2;
   }
 
   // 勝者イベントBody
@@ -176,9 +186,11 @@ message StreamParticipantEventResponse {
     // クイズ開始イベントBody
     QuizStartEventBody quiz_start_event_body = 11;
     // 締め切りイベントBody
-    TimeUpEventBody time_up_event_body = 12;
+    QuizTimeUpEventBody quiz_time_up_event_body = 12;
+    // クイズ結果イベントBody
+    QuizResultEventBody quiz_result_event_body = 13;
     // 勝者イベントBody
-    WinnerEventBody winner_event_body = 13;
+    WinnerEventBody winner_event_body = 14;
   }
 }
 
