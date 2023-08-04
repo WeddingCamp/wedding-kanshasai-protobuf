@@ -135,6 +135,8 @@ enum ParticipantEventType {
 message StreamParticipantEventResponse {
   // イベント種別
   ParticipantEventType event_type = 1;
+  // 正答数
+  int32 correct_answer_count = 2;
 
   // クイズ開始イベントBody
   message PreQuizEventBody {
