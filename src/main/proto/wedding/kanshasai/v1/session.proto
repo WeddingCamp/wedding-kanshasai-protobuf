@@ -28,6 +28,8 @@ service SessionService {
   rpc SetCoverScreen(SetCoverScreenRequest) returns (SetCoverScreenResponse);
   // 結果画面表示
   rpc ShowSessionResult(ShowSessionResultRequest) returns (ShowSessionResultResponse);
+  // 管理画面向けイベントストリーム
+  rpc StreamSessionEvent(StreamSessionEventRequest) returns (stream StreamSessionEventResponse);
 }
 
 // セッション作成リクエスト
@@ -183,4 +185,44 @@ message ShowSessionResultRequest {
 // 結果画面表示レスポンス
 message ShowSessionResultResponse {
   // Empty
+}
+
+// 管理画面向けイベント種別
+enum SessionEventType {
+  // 未定義
+  SESSION_EVENT_TYPE_UNSPECIFIED = 0;
+  // ERRORメッセージイベント
+  SESSION_EVENT_TYPE_ERROR_MESSAGE = 1;
+  // WARNメッセージイベント
+  SESSION_EVENT_TYPE_WARN_MESSAGE = 2;
+  // NOTICEメッセージイベント
+  SESSION_EVENT_TYPE_NOTICE_MESSAGE = 3;
+}
+
+// 管理画面向けストリームリクエスト
+message StreamSessionEventRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// 管理画面向けストリームレスポンス
+message StreamSessionEventResponse {
+  // イベント種別
+  SessionEventType event_type = 1;
+
+  // メッセージイベントBody
+  message MessageEventBody {
+    // メッセージ本文
+    string body = 1;
+  }
+
+  // イベントBody
+  oneof event_body {
+    // ERRORメッセージイベントボディ
+    MessageEventBody error_message_event_body = 10;
+    // WARNメッセージイベントボディ
+    MessageEventBody warn_message_event_body = 11;
+    // NOTICEメッセージイベントボディ
+    MessageEventBody notice_message_event_body = 12;
+  }
 }
