@@ -1,0 +1,8 @@
+h3 {
+    font-weight: 700;
+    color: rgb(172, 132, 0);
+}
+
+h3[id$="Service"] {
+    color: rgb(0, 26, 172);
+}

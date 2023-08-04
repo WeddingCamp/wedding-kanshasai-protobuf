@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package wedding.kanshasai.v1;
+
+option csharp_namespace = "WeddingCamp.ProtoBuf";
+option java_multiple_files = true;
+option java_outer_classname = "QuizProto";
+option java_package = "wedding.kanshasai.v1";
+
+// クイズに対する基本的な操作を提供するサービス
+service QuizService {
+  // クイズ作成
+  rpc CreateQuiz(CreateQuizRequest) returns (CreateQuizResponse);
+  // クイズ削除
+  rpc DeleteQuiz(DeleteQuizRequest) returns (DeleteQuizResponse);
+  // クイズ更新
+  rpc UpdateQuiz(UpdateQuizRequest) returns (UpdateQuizResponse);
+  // クイズ一覧取得API
+  rpc ListQuizzes(ListQuizzesRequest) returns (ListQuizzesResponse);
+}
+
+// クイズ種別
+enum QuizType {
+  // 未定義
+  QUIZ_TYPE_UNSPECIFIED = 0;
+  // 四択クイズ
+  QUIZ_TYPE_FOUR_CHOICES_QUIZ = 1;
+  // 画像並び替えクイズ
+  QUIZ_TYPE_SORT_IMAGE_QUIZ = 2;
+}
+
+// クイズ作成リクエスト
+message CreateQuizRequest {
+  // クイズ問題文
+  string body = 1;
+  // クイズ種別
+  QuizType quiz_type = 2;
+  // クイズ選択肢
+  repeated string choices = 3;
+  // クイズ正解データ
+  string correct_answer = 4;
+}
+
+// クイズ作成レスポンス
+message CreateQuizResponse {
+  // クイズID
+  string quiz_id = 1;
+  // クイズ問題文
+  string body = 2;
+  // クイズ種別
+  QuizType quiz_type = 3;
+  // クイズ選択肢
+  repeated string choices = 4;
+  // クイズ正解データ
+  string correct_answer = 5;
+}
+
+// クイズ削除リクエスト
+message DeleteQuizRequest {
+  // クイズID
+  string quiz_id = 1;
+}
+
+// クイズ削除レスポンス
+message DeleteQuizResponse {
+  // Empty
+}
+
+// クイズ更新リクエスト
+message UpdateQuizRequest {
+  // クイズID
+  string quiz_id = 1;
+  // クイズ問題文
+  string body = 2;
+  // クイズ種別
+  QuizType quiz_type = 3;
+  // クイズ選択肢
+  repeated string choices = 4;
+  // クイズ正解データ
+  string correct_answer = 5;
+}
+
+// クイズ更新レスポンス
+message UpdateQuizResponse {
+  // クイズID
+  string quiz_id = 1;
+  // クイズ問題文
+  string body = 2;
+  // クイズ種別
+  QuizType quiz_type = 3;
+  // クイズ選択肢
+  repeated string choices = 4;
+  // クイズ正解データ
+  string correct_answer = 5;
+}
+
+// クイズ一覧リクエスト
+message ListQuizzesRequest {
+  // Empty
+}
+
+// クイズ一覧レスポンス
+message ListQuizzesResponse {
+  // クイズオブジェクト
+  message Quiz {
+    // クイズID
+    string quiz_id = 1;
+    // クイズ問題文
+    string body = 2;
+    // クイズ種別
+    QuizType quiz_type = 3;
+    // クイズ選択肢
+    repeated string choices = 4;
+    // クイズ正解データ
+    string correct_answer = 5;
+  }
+
+  // クイズの配列
+  repeated Quiz quizzes = 1;
+}
