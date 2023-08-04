@@ -90,6 +90,7 @@ message ListParticipantResponse {
     // 画像ファイルID
     optional string image_id = 4;
   }
+
   // 参加者の配列
   repeated Participant participants = 1;
 }
