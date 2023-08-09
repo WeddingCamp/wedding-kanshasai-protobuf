@@ -80,7 +80,7 @@ jobs:
 
       - name: Build stub codes
         run: |
-          protoc -Isrc/main/proto/ --js_out=import_style=commonjs,binary:. --grpc-web_out=import_style=typescript,mode=grpcwebtext:. $(find src/main/proto -iname "*.proto")
+          protoc -Isrc/main/proto/ --js_out=import_style=commonjs,binary:. --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:. $(find src/main/proto -iname "*.proto")
 
 
   check-buildable-for-csharp:
