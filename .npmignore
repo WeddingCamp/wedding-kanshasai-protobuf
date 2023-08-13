@@ -5,7 +5,10 @@ obj
 doc/
 .idea/
 gradle
-buf.worl.yaml
+buf.work.yaml
 *.kts
 *.properties
 gradlew*
+.gradle/
+package.template.json
+src/
