@@ -28,37 +28,88 @@ jobs:
         with:
           arguments: publish
 
-  publish-nuget-package:
+  publish-upm-package:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
 
-      - name: Setup dotnet 7.0.x
-        uses: actions/setup-dotnet@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
-          dotnet-version: "7.0.x"
+          java-version: '17'
+          distribution: 'temurin'
 
-      - name: Apply version
-        run: sed -i -e "s/0\.0\.0-SNAPSHOT/$(./gradlew -q printVersion)/" WeddingKanshasaiProtoBuf.csproj
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v2
 
-      - name: Install dependencies
-        run: dotnet restore
+      - name: Install protoc-gen-grpc
+        shell: bash
+        run: |
+          curl -Lo grpc-tools.zip https://packages.grpc.io/archive/2022/04/67538122780f8a081c774b66884289335c290cbe-f15a2c1c-582b-4c51-acf2-ab6d711d2c59/csharp/Grpc.Tools.2.47.0-dev202204190851.nupkg
+          unzip -j grpc-tools.zip tools/linux_x64/grpc_csharp_plugin -d /usr/local/bin
+          rm grpc-tools.zip
+          mv /usr/local/bin/grpc_csharp_plugin /usr/local/bin/protoc-gen-grpc
+          chmod +x /usr/local/bin/protoc-gen-grpc
+
+      - name: Generate package.json
+        shell: bash
+        run: |
+          QUERY="del(.devDependencies)|.dependencies={\"wedding.kanshasai.grpc.core\": \"2.47.0\"}|.name=\"wedding.kanshasai.protobuf\"|.displayName=\"Wedding Kanshasai ProtoBuf\"|.version=\"$(./gradlew -q printVersion)\""
+          cat package.template.json | jq "$QUERY" > package.json
 
       - name: Build stub codes
-        run: dotnet build
+        shell: bash
+        run: |
+          mkdir Runtime
+          protoc -Isrc/main/proto/ --csharp_out=./Runtime --csharp_opt=base_namespace=WeddingCamp.ProtoBuf --grpc_out=./Runtime $(find src/main/proto -iname "*.proto")
 
-      - name: Prepare NuGet
-        env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-          NUGET_SOURCE: ${{ secrets.NUGET_SOURCE }}
-        run: nuget setapikey $NUGET_API_KEY -source $NUGET_SOURCE
+      - name: Create asmdef file
+        shell: bash
+        run: |
+          cat << EOF > Runtime/Wedding.Kanshasai.ProtoBuf.asmdef
+          {
+            "name": "WeddingKanshasaiProtoBuf",
+            "rootNamespace": "",
+            "references": [],
+            "includePlatforms": [],
+            "excludePlatforms": [],
+            "allowUnsafeCode": true,
+            "overrideReferences": false,
+            "precompiledReferences": [],
+            "autoReferenced": true,
+            "defineConstraints": [],
+            "versionDefines": [],
+            "noEngineReferences": false
+          }
+          EOF
 
-      - name: Publish to NuGet Repository
+      - name: Create meta files
+        shell: bash
+        run: |
+          for FILE in Runtime/*; do
+            cat << EOF > $FILE.meta
+          fileFormatVersion: 2
+          guid: $(echo $FILE | md5sum | cut -d' ' -f1)
+          folderAsset: yes
+          DefaultImporter:
+            externalObjects: {}
+            userData:
+            assetBundleName:
+            assetBundleVariant:
+          EOF
+          done
+
+      - name: Publish to UPM Repository
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-          NUGET_SOURCE: ${{ secrets.NUGET_SOURCE }}
-        run: dotnet nuget push bin/Debug/*.nupkg --api-key $NUGET_API_KEY --source $NUGET_SOURCE
+          UPM_REGISTRY: ${{ secrets.UPM_REGISTRY }}
+          UPM_SECRET: ${{ secrets.UPM_SECRET }}
+        shell: bash
+        run: |
+          echo //$UPM_REGISTRY/:_auth=$UPM_SECRET >> .npmrc
+          echo registry=https://$UPM_REGISTRY/ >> .npmrc
+          echo always-auth=true >> .npmrc
+          npm publish
 
   publish-npm-package:
     runs-on: ubuntu-latest
@@ -66,10 +117,17 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v3
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Install Protoc
         uses: arduino/setup-protoc@v2
 
       - name: Install protoc-gen-js
+        shell: bash
         run: |
           curl -Lo protobuf-javascript.zip https://github.com/protocolbuffers/protobuf-javascript/releases/download/v3.21.2/protobuf-javascript-3.21.2-linux-x86_64.zip
           unzip -j protobuf-javascript.zip bin/protoc-gen-js -d /usr/local/bin
@@ -77,6 +135,7 @@ jobs:
           chmod +x /usr/local/bin/protoc-gen-js
 
       - name: Install protoc-gen-grpc-web
+        shell: bash
         run: |
           curl -Lo protoc-gen-grpc-web https://github.com/grpc/grpc-web/releases/download/1.4.2/protoc-gen-grpc-web-1.4.2-linux-x86_64
           mv protoc-gen-grpc-web /usr/local/bin/protoc-gen-grpc-web
@@ -87,13 +146,18 @@ jobs:
         with:
           node-version: "18.x"
 
+      - name: Generate package.json
+        shell: bash
+        run: |
+          QUERY=".version=\"$(./gradlew -q printVersion)\""
+          cat package.template.json | jq "$QUERY" > package.json
+
       - name: Install dependencies
+        shell: bash
         run: npm install
 
-      - name: Apply version
-        run: sed -i -e "s/0\.0\.0-SNAPSHOT/$(./gradlew -q printVersion)/" package.json
-
       - name: Build stub codes
+        shell: bash
         run: |
           protoc -Isrc/main/proto/ --js_out=import_style=commonjs,binary:. --grpc-web_out=import_style=commonjs+dts,mode=grpcwebtext:. $(find src/main/proto -iname "*.proto")
 
@@ -101,6 +165,7 @@ jobs:
         env:
           NPM_REGISTRY: ${{ secrets.NPM_REGISTRY }}
           NPM_SECRET: ${{ secrets.NPM_SECRET }}
+        shell: bash
         run: |
           echo //$NPM_REGISTRY/:_auth=$NPM_SECRET >> .npmrc
           echo registry=https://$NPM_REGISTRY/ >> .npmrc
@@ -128,9 +193,11 @@ jobs:
         uses: arduino/setup-protoc@v2
 
       - name: Prepare Protoc gen doc
+        shell: bash
         run: go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@latest
 
       - name: Generate documents
+        shell: bash
         run: |
           protoc --doc_out=./doc --doc_opt=html,index.html --proto_path=src/main/proto/ $(find src/main/proto -iname "*.proto")
 

@@ -4,7 +4,7 @@ package wedding.kanshasai.v1;
 
 option csharp_namespace = "WeddingCamp.ProtoBuf";
 option java_multiple_files = true;
-option java_outer_classname = "CoomonProto";
+option java_outer_classname = "CommonProto";
 option java_package = "wedding.kanshasai.v1";
 
 // メッセージレベル種別
