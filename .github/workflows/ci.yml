@@ -72,6 +72,10 @@ jobs:
         with:
           node-version: "18.x"
 
+      - name: Copy package.json
+        run: |
+          cp package.template.json package.json
+
       - name: Install dependencies
         run: npm install
 
