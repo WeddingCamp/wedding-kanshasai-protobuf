@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package wedding.kanshasai.v1;
+
+option csharp_namespace = "WeddingCamp.ProtoBuf";
+option java_multiple_files = true;
+option java_outer_classname = "EventProto";
+option java_package = "wedding.kanshasai.v1";
+
+// イベントに関連する操作を提供するサービス
+service EventService {
+  // イベント作成
+  rpc CreateEvent(CreateEventRequest) returns (CreateEventResponse);
+  // イベント更新
+  rpc UpdateEvent(UpdateEventRequest) returns (UpdateEventResponse);
+  // イベント削除
+  rpc DeleteEvent(DeleteEventRequest) returns (DeleteEventResponse);
+  // イベント一覧
+  rpc ListEvents(ListEventsRequest) returns (ListEventsResponse);
+}
+
+// イベント作成リクエスト
+message CreateEventRequest {
+  // イベント名
+  string event_name = 1;
+}
+
+// イベント作成レスポンス
+message CreateEventResponse {
+  // イベントID
+  string event_id = 1;
+  // イベント名
+  string event_name = 2;
+}
+
+// イベント作成リクエスト
+message UpdateEventRequest {
+  // イベントID
+  string event_id = 1;
+  // イベント名
+  string event_name = 2;
+}
+
+// イベント作成レスポンス
+message UpdateEventResponse {
+  // イベントID
+  string event_id = 1;
+  // イベント名
+  string event_name = 2;
+}
+
+// イベント削除リクエスト
+message DeleteEventRequest {
+  // イベントID
+  string event_id = 1;
+}
+
+// イベント削除レスポンス
+message DeleteEventResponse {
+  // Empty
+}
+
+// イベント一覧リクエスト
+message ListEventsRequest {
+  // Empty
+}
+
+// イベント一覧レスポンス
+message ListEventsResponse {
+  // イベントオブジェクト
+  message Event {
+    // イベントID
+    string event_id = 1;
+    // イベント名
+    string event_name = 2;
+  }
+
+  // イベント一覧
+  repeated Event events = 1;
+}
