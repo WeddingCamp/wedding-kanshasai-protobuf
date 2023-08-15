@@ -151,6 +151,12 @@ message StreamScreenEventResponse {
     // Empty
   }
 
+  // カバー画像表示Body
+  message CoverScreenEvent {
+    // カバー画像種別
+    CoverScreenType type = 1;
+  }
+
   // イベントBody
   oneof event_body {
     // クイズ表示イベントBody
@@ -169,5 +175,7 @@ message StreamScreenEventResponse {
     SessionResultEvent result_event = 16;
     // 終了イベントBody
     FinishEvent finish_event = 17;
+    // カバー画像表示イベントBody
+    CoverScreenEvent cover_screen_event = 18;
   }
 }
