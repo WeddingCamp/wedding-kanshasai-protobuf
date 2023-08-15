@@ -130,11 +130,11 @@ enum ParticipantEventType {
   // 勝者イベント
   PARTICIPANT_EVENT_TYPE_WINNER = 5;
   // 中間結果表示イベント
-  SCREEN_EVENT_TYPE_INTERIM_RESULT = 6;
+  PARTICIPANT_EVENT_TYPE_INTERIM_RESULT = 6;
   // 最終結果表示イベント
-  SCREEN_EVENT_TYPE_RESULT = 7;
+  PARTICIPANT_EVENT_TYPE_RESULT = 7;
   // 終了イベント
-  SCREEN_EVENT_TYPE_FINISH = 8;
+  PARTICIPANT_EVENT_TYPE_FINISH = 8;
 }
 
 // 参加者向けイベントストリームレスポンス
@@ -145,7 +145,7 @@ message StreamParticipantEventResponse {
   int32 correct_answer_count = 2;
 
   // クイズ開始イベントBody
-  message PreQuizEventBody {
+  message PreQuizEvent {
     // クイズID
     string quiz_id = 1;
     // クイズ問題文
@@ -157,7 +157,7 @@ message StreamParticipantEventResponse {
   }
 
   // 回答開始イベントBody（PreQuizで取得できていなくても動かせるよう全データを載せる）
-  message QuizStartEventBody {
+  message QuizStartEvent {
     // クイズID
     string quiz_id = 1;
     // クイズ問題文
@@ -169,13 +169,13 @@ message StreamParticipantEventResponse {
   }
 
   // 締め切りイベントBody
-  message QuizTimeUpEventBody {
+  message QuizTimeUpEvent {
     // クイズID
     string quiz_id = 1;
   }
 
   // クイズ結果イベントBody
-  message QuizResultEventBody {
+  message QuizResultEvent {
     // クイズID
     string quiz_id = 1;
     // 正解フラグ
@@ -183,11 +183,11 @@ message StreamParticipantEventResponse {
   }
 
   // 勝者イベントBody
-  message WinnerEventBody {
+  message WinnerEvent {
     // Empty
   }
 
-  // 中間/最終結果発表イベント
+  // 中間/最終結果発表イベントBody
   message SessionResultEvent {
     // 参加者のスコア
     message ParticipantSessionScore {
@@ -203,6 +203,7 @@ message StreamParticipantEventResponse {
     repeated ParticipantSessionScore participant_session_score_list = 1;
   }
 
+  // 終了イベントBody
   message FinishEvent {
     // Empty
   }
@@ -210,15 +211,15 @@ message StreamParticipantEventResponse {
   // イベントBody
   oneof event_body {
     // クイズ開始イベントBody
-    PreQuizEventBody pre_quiz_event_body = 10;
+    PreQuizEvent pre_quiz_event_body = 10;
     // クイズ開始イベントBody
-    QuizStartEventBody quiz_start_event_body = 11;
+    QuizStartEvent quiz_start_event_body = 11;
     // 締め切りイベントBody
-    QuizTimeUpEventBody quiz_time_up_event_body = 12;
+    QuizTimeUpEvent quiz_time_up_event_body = 12;
     // クイズ結果イベントBody
-    QuizResultEventBody quiz_result_event_body = 13;
+    QuizResultEvent quiz_result_event_body = 13;
     // 勝者イベントBody
-    WinnerEventBody winner_event_body = 14;
+    WinnerEvent winner_event_body = 14;
     // 中間結果表示イベントBody
     SessionResultEvent interim_result_event = 15;
     // 最終結果表示イベントBody

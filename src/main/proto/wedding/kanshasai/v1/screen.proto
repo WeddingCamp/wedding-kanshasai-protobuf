@@ -68,7 +68,7 @@ message StreamScreenEventResponse {
   // イベント種別
   ScreenEventType event_type = 1;
 
-  // クイズ表示/開始イベント
+  // クイズ表示/開始イベントBody
   message QuizEvent {
     // クイズID
     string quiz_id = 1;
@@ -80,7 +80,7 @@ message StreamScreenEventResponse {
     repeated string choices = 4;
   }
 
-  // クイズ結果発表イベント
+  // クイズ結果発表イベントBody
   message QuizChoiceResultEvent {
     // 選択肢の結果
     message ChoiceResult {
@@ -96,7 +96,7 @@ message StreamScreenEventResponse {
     repeated ChoiceResult choice_result_list = 1;
   }
 
-  // クイズ結果発表イベント
+  // クイズ結果発表イベントBody
   message QuizResultEvent {
     // 選択肢の結果
     message ChoiceResult {
@@ -114,7 +114,7 @@ message StreamScreenEventResponse {
     string correct_choice_id = 2;
   }
 
-  // 早押し一位表示イベント
+  // 早押し一位表示イベントBody
   message QuizTimeResultEvent {
     // 参加者のスコア
     message ParticipantQuizTime {
@@ -130,7 +130,7 @@ message StreamScreenEventResponse {
     repeated ParticipantQuizTime participant_quiz_time_list = 1;
   }
 
-  // 中間/最終結果発表イベント
+  // 中間/最終結果発表イベントBody
   message SessionResultEvent {
     // 参加者のスコア
     message ParticipantSessionScore {
@@ -146,6 +146,7 @@ message StreamScreenEventResponse {
     repeated ParticipantSessionScore participant_session_score_list = 1;
   }
 
+  // 終了イベントBody
   message FinishEvent {
     // Empty
   }
