@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package wedding.kanshasai.v1;
 
+import "wedding/kanshasai/v1/common.proto";
 import "wedding/kanshasai/v1/quiz.proto";
 
 option csharp_namespace = "WeddingCamp.ProtoBuf";
@@ -140,18 +141,6 @@ message ShowQuizResultRequest {
 // クイズ結果画面表示レスポンス
 message ShowQuizResultResponse {
   // Empty
-}
-
-// カバー画面種別
-enum CoverScreenType {
-  // 未定義
-  COVER_SCREEN_TYPE_UNSPECIFIED = 0;
-  // ようこそスクリーン
-  COVER_SCREEN_TYPE_WELCOME = 1;
-  // ルール説明スクリーン
-  COVER_SCREEN_TYPE_RULE = 2;
-  // ふた絵スクリーン
-  COVER_SCREEN_TYPE_COVER = 9;
 }
 
 // カバー画面表示リクエスト

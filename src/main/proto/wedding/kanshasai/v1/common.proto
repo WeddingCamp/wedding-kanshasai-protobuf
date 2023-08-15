@@ -18,3 +18,15 @@ enum MessageLevel {
   // ERRORレベル
   MESSAGE_LEVEL_ERROR = 3;
 }
+
+// カバー画面種別
+enum CoverScreenType {
+  // 未定義
+  COVER_SCREEN_TYPE_UNSPECIFIED = 0;
+  // ようこそスクリーン
+  COVER_SCREEN_TYPE_WELCOME = 1;
+  // ルール説明スクリーン
+  COVER_SCREEN_TYPE_RULE = 2;
+  // ふた絵スクリーン
+  COVER_SCREEN_TYPE_COVER = 9;
+}
