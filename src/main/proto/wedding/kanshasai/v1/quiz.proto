@@ -39,6 +39,8 @@ message CreateQuizRequest {
   repeated string choices = 3;
   // クイズ正解データ
   string correct_answer = 4;
+  // イベントID
+  string event_id = 5;
 }
 
 // クイズ作成レスポンス
@@ -53,6 +55,8 @@ message CreateQuizResponse {
   repeated string choices = 4;
   // クイズ正解データ
   string correct_answer = 5;
+  // イベントID
+  string event_id = 6;
 }
 
 // クイズ削除リクエスト
