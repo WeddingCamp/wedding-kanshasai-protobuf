@@ -45,6 +45,14 @@ message CreateQuizRequest {
 
 // クイズ作成レスポンス
 message CreateQuizResponse {
+  // 選択肢オブジェクト
+  message Choice {
+    // 選択肢ID
+    string choice_id = 1;
+    // 選択肢Body
+    string body = 2;
+  }
+
   // クイズID
   string quiz_id = 1;
   // クイズ問題文
@@ -52,7 +60,7 @@ message CreateQuizResponse {
   // クイズ種別
   QuizType quiz_type = 3;
   // クイズ選択肢
-  repeated string choices = 4;
+  repeated Choice choices = 4;
   // クイズ正解データ
   string correct_answer = 5;
   // イベントID
@@ -78,7 +86,7 @@ message UpdateQuizRequest {
   string body = 2;
   // クイズ種別
   QuizType quiz_type = 3;
-  // クイズ選択肢
+  // クイズ選択肢(一部更新に対応しないので、全て削除して再度作成する)
   repeated string choices = 4;
   // クイズ正解データ
   string correct_answer = 5;
@@ -86,6 +94,14 @@ message UpdateQuizRequest {
 
 // クイズ更新レスポンス
 message UpdateQuizResponse {
+  // 選択肢オブジェクト
+  message Choice {
+    // 選択肢ID
+    string choice_id = 1;
+    // 選択肢Body
+    string body = 2;
+  }
+
   // クイズID
   string quiz_id = 1;
   // クイズ問題文
@@ -93,7 +109,7 @@ message UpdateQuizResponse {
   // クイズ種別
   QuizType quiz_type = 3;
   // クイズ選択肢
-  repeated string choices = 4;
+  repeated Choice choices = 4;
   // クイズ正解データ
   string correct_answer = 5;
 }
@@ -105,6 +121,14 @@ message ListQuizzesRequest {
 
 // クイズ一覧レスポンス
 message ListQuizzesResponse {
+  // 選択肢オブジェクト
+  message Choice {
+    // 選択肢ID
+    string choice_id = 1;
+    // 選択肢Body
+    string body = 2;
+  }
+
   // クイズオブジェクト
   message Quiz {
     // クイズID
@@ -114,7 +138,7 @@ message ListQuizzesResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated string choices = 4;
+    repeated Choice choices = 4;
     // クイズ正解データ
     string correct_answer = 5;
   }

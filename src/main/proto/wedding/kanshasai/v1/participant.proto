@@ -148,6 +148,14 @@ message StreamParticipantEventResponse {
 
   // クイズ開始イベントBody
   message PreQuizEvent {
+    // 選択肢オブジェクト
+    message Choice {
+      // 選択肢ID
+      string choice_id = 1;
+      // 選択肢Body
+      string body = 2;
+    }
+
     // クイズID
     string quiz_id = 1;
     // クイズ問題文
@@ -155,11 +163,19 @@ message StreamParticipantEventResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated string choices = 4;
+    repeated Choice choices = 4;
   }
 
   // 回答開始イベントBody（PreQuizで取得できていなくても動かせるよう全データを載せる）
   message QuizStartEvent {
+    // 選択肢オブジェクト
+    message Choice {
+      // 選択肢ID
+      string choice_id = 1;
+      // 選択肢Body
+      string body = 2;
+    }
+
     // クイズID
     string quiz_id = 1;
     // クイズ問題文
@@ -167,7 +183,7 @@ message StreamParticipantEventResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated string choices = 4;
+    repeated Choice choices = 4;
   }
 
   // 締め切りイベントBody
