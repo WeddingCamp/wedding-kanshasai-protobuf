@@ -59,6 +59,14 @@ message ListSessionQuizzesRequest {
 
 // クイズ一覧レスポンス
 message ListSessionQuizzesResponse {
+  // 選択肢オブジェクト
+  message Choice {
+    // 選択肢ID
+    string choice_id = 1;
+    // 選択肢Body
+    string body = 2;
+  }
+
   // 完了フラグを持ったクイズオブジェクト
   message SessionQuiz {
     // クイズID
@@ -68,7 +76,7 @@ message ListSessionQuizzesResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated string choices = 4;
+    repeated Choice choices = 4;
     // 完了済フラグ
     bool is_completed = 5;
   }
