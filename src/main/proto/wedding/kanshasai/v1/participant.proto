@@ -135,6 +135,8 @@ enum ParticipantEventType {
   PARTICIPANT_EVENT_TYPE_RESULT = 7;
   // 終了イベント
   PARTICIPANT_EVENT_TYPE_FINISH = 8;
+  // 現在状態イベント
+  PARTICIPANT_EVENT_TYPE_CURRENT_STATE = 9;
 }
 
 // 参加者向けイベントストリームレスポンス
@@ -210,6 +212,12 @@ message StreamParticipantEventResponse {
     // Empty
   }
 
+  // 現在状態イベントBody
+  message CurrentStateEvent {
+    // ゲームが進行中かどうか
+    bool is_game_in_progress = 1;
+  }
+
   // イベントBody
   oneof event_body {
     // クイズ開始イベントBody
@@ -228,6 +236,8 @@ message StreamParticipantEventResponse {
     SessionResultEvent result_event = 16;
     // 終了イベントBody
     FinishEvent finish_event = 17;
+    // 現在状態イベントBody
+    CurrentStateEvent current_state_event = 18;
   }
 }
 
