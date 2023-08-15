@@ -68,6 +68,14 @@ message StreamScreenEventResponse {
   // イベント種別
   ScreenEventType event_type = 1;
 
+  // 選択肢オブジェクト
+  message Choice {
+    // 選択肢ID
+    string choice_id = 1;
+    // 選択肢Body
+    string body = 2;
+  }
+
   // クイズ表示/開始イベントBody
   message QuizEvent {
     // クイズID
@@ -77,41 +85,41 @@ message StreamScreenEventResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated string choices = 4;
+    repeated Choice choices = 4;
   }
 
   // クイズ結果発表イベントBody
   message QuizChoiceResultEvent {
     // 選択肢の結果
-    message ChoiceResult {
+    message ChoiceWithCount {
       // 選択肢ID
       string choice_id = 1;
-      // 選択肢の内容
-      string choice = 2;
+      // 選択肢Body
+      string body = 2;
       // 件数
       string count = 3;
     }
 
     // 選択肢の結果の配列
-    repeated ChoiceResult choice_result_list = 1;
+    repeated ChoiceWithCount choice_result_list = 1;
   }
 
   // クイズ結果発表イベントBody
   message QuizResultEvent {
     // 選択肢の結果
-    message ChoiceResult {
+    message ChoiceWithResult {
       // 選択肢ID
       string choice_id = 1;
-      // 選択肢の内容
-      string choice = 2;
+      // 選択肢Body
+      string body = 2;
       // 件数
       string count = 3;
+      // 正解フラグ
+      bool is_correct_choice = 4;
     }
 
     // 選択肢の結果の配列
-    repeated ChoiceResult choice_result_list = 1;
-    // 正解の選択肢ID
-    string correct_choice_id = 2;
+    repeated ChoiceWithResult choice_result_list = 1;
   }
 
   // 早押し一位表示イベントBody
