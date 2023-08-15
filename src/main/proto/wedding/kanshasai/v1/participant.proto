@@ -180,6 +180,8 @@ message StreamParticipantEventResponse {
     string quiz_id = 1;
     // 正解フラグ
     bool is_correct = 2;
+    // 回答フラグ
+    bool is_answered = 3;
   }
 
   // 勝者イベントBody
