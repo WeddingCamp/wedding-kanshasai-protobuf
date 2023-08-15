@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package wedding.kanshasai.v1;
 
+import "wedding/kanshasai/v1/common.proto";
 import "wedding/kanshasai/v1/quiz.proto";
 
 option csharp_namespace = "WeddingCamp.ProtoBuf";
@@ -58,6 +59,14 @@ message ListSessionQuizzesRequest {
 
 // クイズ一覧レスポンス
 message ListSessionQuizzesResponse {
+  // 選択肢オブジェクト
+  message Choice {
+    // 選択肢ID
+    string choice_id = 1;
+    // 選択肢Body
+    string body = 2;
+  }
+
   // 完了フラグを持ったクイズオブジェクト
   message SessionQuiz {
     // クイズID
@@ -67,7 +76,7 @@ message ListSessionQuizzesResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated string choices = 4;
+    repeated Choice choices = 4;
     // 完了済フラグ
     bool is_completed = 5;
   }
@@ -132,18 +141,6 @@ message ShowQuizResultRequest {
 // クイズ結果画面表示レスポンス
 message ShowQuizResultResponse {
   // Empty
-}
-
-// カバー画面種別
-enum CoverScreenType {
-  // 未定義
-  COVER_SCREEN_TYPE_UNSPECIFIED = 0;
-  // ようこそスクリーン
-  COVER_SCREEN_TYPE_WELCOME = 1;
-  // ルール説明スクリーン
-  COVER_SCREEN_TYPE_RULE = 2;
-  // ふた絵スクリーン
-  COVER_SCREEN_TYPE_COVER = 9;
 }
 
 // カバー画面表示リクエスト
