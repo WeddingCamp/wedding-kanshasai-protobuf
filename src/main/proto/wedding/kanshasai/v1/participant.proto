@@ -129,6 +129,12 @@ enum ParticipantEventType {
   PARTICIPANT_EVENT_TYPE_QUIZ_RESULT = 4;
   // 勝者イベント
   PARTICIPANT_EVENT_TYPE_WINNER = 5;
+  // 中間結果表示イベント
+  SCREEN_EVENT_TYPE_INTERIM_RESULT = 6;
+  // 最終結果表示イベント
+  SCREEN_EVENT_TYPE_RESULT = 7;
+  // 終了イベント
+  SCREEN_EVENT_TYPE_FINISH = 8;
 }
 
 // 参加者向けイベントストリームレスポンス

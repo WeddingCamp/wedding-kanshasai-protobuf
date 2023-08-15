@@ -53,6 +53,8 @@ enum ScreenEventType {
   SCREEN_EVENT_TYPE_RESULT = 7;
   // カバー画像表示イベント
   SCREEN_EVENT_TYPE_COVER = 8;
+  // 終了イベント
+  SCREEN_EVENT_TYPE_FINISH = 9;
 }
 
 // スクリーン向けイベントリクエスト
