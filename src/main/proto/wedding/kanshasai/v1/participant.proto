@@ -187,6 +187,26 @@ message StreamParticipantEventResponse {
     // Empty
   }
 
+  // 中間/最終結果発表イベント
+  message SessionResultEvent {
+    // 参加者のスコア
+    message ParticipantSessionScore {
+      // 参加者名
+      string participant_name = 1;
+      // 参加者画像ID
+      string participant_image_id = 2;
+      // スコア
+      string score = 3;
+    }
+
+    // 参加者のスコアの配列
+    repeated ParticipantSessionScore participant_session_score_list = 1;
+  }
+
+  message FinishEvent {
+    // Empty
+  }
+
   // イベントBody
   oneof event_body {
     // クイズ開始イベントBody
@@ -199,6 +219,12 @@ message StreamParticipantEventResponse {
     QuizResultEventBody quiz_result_event_body = 13;
     // 勝者イベントBody
     WinnerEventBody winner_event_body = 14;
+    // 中間結果表示イベントBody
+    SessionResultEvent interim_result_event = 15;
+    // 最終結果表示イベントBody
+    SessionResultEvent result_event = 16;
+    // 終了イベントBody
+    FinishEvent finish_event = 17;
   }
 }
 

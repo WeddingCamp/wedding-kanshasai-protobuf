@@ -146,6 +146,10 @@ message StreamScreenEventResponse {
     repeated ParticipantSessionScore participant_session_score_list = 1;
   }
 
+  message FinishEvent {
+    // Empty
+  }
+
   // イベントBody
   oneof event_body {
     // クイズ表示イベントBody
@@ -162,5 +166,7 @@ message StreamScreenEventResponse {
     SessionResultEvent interim_result_event = 15;
     // 最終結果表示イベントBody
     SessionResultEvent result_event = 16;
+    // 終了イベントBody
+    FinishEvent finish_event = 17;
   }
 }
