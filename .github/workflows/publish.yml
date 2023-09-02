@@ -6,8 +6,7 @@ on:
 
 jobs:
   publish-maven-package:
-    runs-on:
-      - self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
@@ -30,8 +29,7 @@ jobs:
           arguments: publish
 
   publish-upm-package:
-    runs-on:
-      - self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
@@ -113,9 +111,8 @@ jobs:
           echo always-auth=true >> .npmrc
           npm publish
 
-  publish-npm-package:
-    runs-on:
-      - self-hosted
+  publish-npm-package::
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
@@ -176,8 +173,7 @@ jobs:
           npm publish
 
   deploy-document:
-    runs-on:
-      - self-hosted
+    runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
