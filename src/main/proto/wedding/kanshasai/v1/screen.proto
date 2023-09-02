@@ -162,7 +162,7 @@ message StreamScreenEventResponse {
   // カバー画像表示Body
   message CoverScreenEvent {
     // カバー画像種別
-    CoverScreenType type = 1;
+    CoverScreenType cover_type = 1;
   }
 
   // イベントBody
