@@ -6,8 +6,7 @@ on:
 
 jobs:
   validate-protobuf:
-    runs-on:
-      - self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
@@ -27,8 +26,7 @@ jobs:
         run: buf format --exit-code
 
   check-buildable-for-java:
-    runs-on:
-      - self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
@@ -48,8 +46,7 @@ jobs:
           arguments: build
 
   check-buildable-for-typescript:
-    runs-on:
-      - self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
@@ -88,8 +85,7 @@ jobs:
 
 
   check-buildable-for-csharp:
-    runs-on:
-      - self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
         uses: actions/checkout@v3
