@@ -76,5 +76,5 @@ message ListEventsResponse {
   }
 
   // イベント一覧
-  repeated Event events = 1;
+  repeated Event event_list = 1;
 }

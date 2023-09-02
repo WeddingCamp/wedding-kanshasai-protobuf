@@ -85,7 +85,7 @@ message StreamScreenEventResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated Choice choices = 4;
+    repeated Choice choice_list = 4;
   }
 
   // クイズ結果発表イベントBody

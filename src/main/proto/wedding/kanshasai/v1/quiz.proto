@@ -38,7 +38,7 @@ message CreateQuizRequest {
   // クイズ種別
   QuizType quiz_type = 2;
   // クイズ選択肢
-  repeated string choices = 3;
+  repeated string choice_list = 3;
   // クイズ正解データ
   string correct_answer = 4;
   // イベントID
@@ -62,7 +62,7 @@ message CreateQuizResponse {
   // クイズ種別
   QuizType quiz_type = 3;
   // クイズ選択肢
-  repeated Choice choices = 4;
+  repeated Choice choice_list = 4;
   // クイズ正解データ
   string correct_answer = 5;
   // イベントID
@@ -89,7 +89,7 @@ message UpdateQuizRequest {
   // クイズ種別
   QuizType quiz_type = 3;
   // クイズ選択肢(一部更新に対応しないので、全て削除して再度作成する)
-  repeated string choices = 4;
+  repeated string choice_list = 4;
   // クイズ正解データ
   string correct_answer = 5;
 }
@@ -111,7 +111,7 @@ message UpdateQuizResponse {
   // クイズ種別
   QuizType quiz_type = 3;
   // クイズ選択肢
-  repeated Choice choices = 4;
+  repeated Choice choice_list = 4;
   // クイズ正解データ
   string correct_answer = 5;
 }
@@ -140,11 +140,11 @@ message ListQuizzesResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated Choice choices = 4;
+    repeated Choice choice_list = 4;
     // クイズ正解データ
     string correct_answer = 5;
   }
 
   // クイズの配列
-  repeated Quiz quizzes = 1;
+  repeated Quiz quiz_list = 1;
 }
