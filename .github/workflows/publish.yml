@@ -111,7 +111,7 @@ jobs:
           echo always-auth=true >> .npmrc
           npm publish
 
-  publish-npm-package::
+  publish-npm-package:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Project
