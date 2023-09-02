@@ -49,10 +49,10 @@ jobs:
         shell: bash
         run: |
           curl -Lo grpc-tools.zip https://packages.grpc.io/archive/2022/04/67538122780f8a081c774b66884289335c290cbe-f15a2c1c-582b-4c51-acf2-ab6d711d2c59/csharp/Grpc.Tools.2.47.0-dev202204190851.nupkg
-          unzip -j grpc-tools.zip tools/linux_x64/grpc_csharp_plugin -d /usr/local/bin
+          sudo unzip -j grpc-tools.zip tools/linux_x64/grpc_csharp_plugin -d /usr/local/bin
           rm grpc-tools.zip
-          mv /usr/local/bin/grpc_csharp_plugin /usr/local/bin/protoc-gen-grpc
-          chmod +x /usr/local/bin/protoc-gen-grpc
+          sudo mv /usr/local/bin/grpc_csharp_plugin /usr/local/bin/protoc-gen-grpc
+          sudo chmod +x /usr/local/bin/protoc-gen-grpc
 
       - name: Generate package.json
         shell: bash
@@ -133,16 +133,16 @@ jobs:
         shell: bash
         run: |
           curl -Lo protobuf-javascript.zip https://github.com/protocolbuffers/protobuf-javascript/releases/download/v3.21.2/protobuf-javascript-3.21.2-linux-x86_64.zip
-          unzip -j protobuf-javascript.zip bin/protoc-gen-js -d /usr/local/bin
+          sudo unzip -j protobuf-javascript.zip bin/protoc-gen-js -d /usr/local/bin
           rm protobuf-javascript.zip
-          chmod +x /usr/local/bin/protoc-gen-js
+          sudo chmod +x /usr/local/bin/protoc-gen-js
 
       - name: Install protoc-gen-grpc-web
         shell: bash
         run: |
           curl -Lo protoc-gen-grpc-web https://github.com/grpc/grpc-web/releases/download/1.4.2/protoc-gen-grpc-web-1.4.2-linux-x86_64
-          mv protoc-gen-grpc-web /usr/local/bin/protoc-gen-grpc-web
-          chmod +x /usr/local/bin/protoc-gen-grpc-web
+          sudo mv protoc-gen-grpc-web /usr/local/bin/protoc-gen-grpc-web
+          sudo chmod +x /usr/local/bin/protoc-gen-grpc-web
 
       - name: Setup node 18.x
         uses: actions/setup-node@v3
