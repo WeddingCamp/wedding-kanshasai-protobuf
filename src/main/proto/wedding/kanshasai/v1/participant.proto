@@ -13,6 +13,8 @@ option java_package = "wedding.kanshasai.v1";
 service ParticipantService {
   // 参加者作成（管理側用）
   rpc CreateParticipant(CreateParticipantRequest) returns (CreateParticipantResponse);
+  // 参加者取得
+  rpc GetParticipant(GetParticipantRequest) returns (GetParticipantResponse);
   // 参加者更新（管理側用）
   rpc UpdateParticipant(UpdateParticipantRequest) returns (UpdateParticipantResponse);
   // 参加者一覧
@@ -49,6 +51,26 @@ message CreateParticipantRequest {
 
 // 参加者作成レスポンス
 message CreateParticipantResponse {
+  // 参加者ID
+  string participant_id = 1;
+  // セッションID
+  string session_id = 2;
+  // 参加者名
+  string name = 3;
+  // 画像ファイルID
+  optional string image_id = 4;
+  // 参加者種別
+  ParticipantType participant_type = 5;
+}
+
+// 参加者取得リクエスト
+message GetParticipantRequest {
+  // 参加者ID
+  string participant_id = 1;
+}
+
+// 参加者取得レスポンス
+message GetParticipantResponse {
   // 参加者ID
   string participant_id = 1;
   // セッションID
