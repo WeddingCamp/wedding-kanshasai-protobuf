@@ -120,7 +120,7 @@ message CancelCurrentQuizResponse {
   // Empty
 }
 
-// クイズの種類
+// クイズ結果画面種別
 enum QuizResultScreenType {
   // 未定義
   QUIZ_RESULT_SCREEN_TYPE_UNSPECIFIED = 0;
@@ -158,7 +158,7 @@ message SetCoverScreenResponse {
   // Empty
 }
 
-// 結果画面種別
+// セッション結果画面種別
 enum SessionResultScreenType {
   // 未定義
   SESSION_RESULT_SCREEN_TYPE_UNSPECIFIED = 0;
