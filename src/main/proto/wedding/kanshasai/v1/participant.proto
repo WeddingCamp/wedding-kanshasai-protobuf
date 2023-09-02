@@ -43,7 +43,7 @@ message CreateParticipantRequest {
   string name = 2;
   // 画像ファイルID
   optional string image_id = 3;
-  // 新郎側・新婦側
+  // 参加者種別
   ParticipantType participant_type = 4;
 }
 
@@ -57,6 +57,8 @@ message CreateParticipantResponse {
   string name = 3;
   // 画像ファイルID
   optional string image_id = 4;
+  // 参加者種別
+  ParticipantType participant_type = 5;
 }
 
 // 参加者更新リクエスト
@@ -69,6 +71,8 @@ message UpdateParticipantRequest {
   string name = 3;
   // 画像ファイルID
   optional string image_id = 4;
+  // 参加者種別
+  ParticipantType participant_type = 5;
 }
 
 // 参加者更新レスポンス
@@ -81,12 +85,16 @@ message UpdateParticipantResponse {
   string name = 3;
   // 画像ファイルID
   optional string image_id = 4;
+  // 参加者種別
+  ParticipantType participant_type = 5;
 }
 
 // 参加者一覧リクエスト
 message ListParticipantsRequest {
   // セッションID
   string session_id = 1;
+  // 参加者種別（未指定で両方）
+  optional ParticipantType participant_type = 2;
 }
 
 // 参加者一覧レスポンス
@@ -101,6 +109,8 @@ message ListParticipantsResponse {
     string name = 3;
     // 画像ファイルID
     optional string image_id = 4;
+    // 参加者種別
+    ParticipantType participant_type = 5;
   }
 
   // 参加者の配列
