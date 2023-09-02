@@ -17,6 +17,8 @@ service SessionService {
   rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse);
   // セッションに紐づいたクイズ一覧
   rpc ListSessionQuizzes(ListSessionQuizzesRequest) returns (ListSessionQuizzesResponse);
+  // イントロダクション選択
+  rpc SetNextIntroduction(SetNextIntroductionRequest) returns (SetNextIntroductionResponse);
   // クイズ選択
   rpc SetNextQuiz(SetNextQuizRequest) returns (SetNextQuizResponse);
   // クイズ開始（カウントダウンスタート）
@@ -85,6 +87,19 @@ message ListSessionQuizzesResponse {
   repeated SessionQuiz quiz_list = 1;
 }
 
+// イントロダクション選択リクエスト
+message SetNextIntroductionRequest {
+  // セッションID
+  string session_id = 1;
+  // イントロダクション画面種別
+  IntroductionScreenType screen_type = 2;
+}
+
+// クイズ選択レスポンス
+message SetNextIntroductionResponse {
+  // Empty
+}
+
 // クイズ選択リクエスト
 message SetNextQuizRequest {
   // セッションID
@@ -147,10 +162,8 @@ message ShowQuizResultResponse {
 message SetCoverScreenRequest {
   // セッションID
   string session_id = 1;
-  // カバー画面種別
-  CoverScreenType screen_type = 2;
   // カバー画面を表示するか
-  bool is_visible = 3;
+  bool is_visible = 2;
 }
 
 // カバー画面表示レスポンス

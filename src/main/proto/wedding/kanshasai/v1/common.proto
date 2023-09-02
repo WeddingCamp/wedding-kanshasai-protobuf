@@ -19,14 +19,14 @@ enum MessageLevel {
   MESSAGE_LEVEL_ERROR = 3;
 }
 
-// カバー画面種別
-enum CoverScreenType {
+// イントロダクション画面種別
+enum IntroductionScreenType {
   // 未定義
-  COVER_SCREEN_TYPE_UNSPECIFIED = 0;
+  INTRODUCTION_SCREEN_TYPE_UNSPECIFIED = 0;
   // ようこそスクリーン
-  COVER_SCREEN_TYPE_WELCOME = 1;
+  INTRODUCTION_SCREEN_TYPE_WELCOME = 1;
   // ルール説明スクリーン
-  COVER_SCREEN_TYPE_RULE = 2;
-  // ふた絵スクリーン
-  COVER_SCREEN_TYPE_COVER = 9;
+  INTRODUCTION_SCREEN_TYPE_RULE = 2;
+  // ロゴスクリーン
+  INTRODUCTION_SCREEN_TYPE_LOGO = 3;
 }

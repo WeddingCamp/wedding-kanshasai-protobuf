@@ -55,6 +55,8 @@ enum ScreenEventType {
   SCREEN_EVENT_TYPE_COVER = 8;
   // 終了イベント
   SCREEN_EVENT_TYPE_FINISH = 9;
+  // イントロダクション表示イベント
+  SCREEN_EVENT_TYPE_INTRODUCTION = 10;
 }
 
 // スクリーン向けイベントリクエスト
@@ -161,8 +163,14 @@ message StreamScreenEventResponse {
 
   // カバー画像表示Body
   message CoverScreenEvent {
-    // カバー画像種別
-    CoverScreenType cover_type = 1;
+    // カバー画像を表示するか
+    bool is_visible = 1;
+  }
+
+  // イントロダクション画像表示Body
+  message IntroductionScreenEvent {
+    // イントロダクション画像種別
+    IntroductionScreenType introduction_screen_type = 1;
   }
 
   // イベントBody
@@ -185,5 +193,7 @@ message StreamScreenEventResponse {
     FinishEvent finish_event = 17;
     // カバー画像表示イベントBody
     CoverScreenEvent cover_screen_event = 18;
+    // イントロダクション表示イベントBody
+    IntroductionScreenEvent introduction_screen_event = 19;
   }
 }
