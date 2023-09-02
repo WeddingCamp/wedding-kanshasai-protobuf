@@ -27,6 +27,8 @@ enum QuizType {
   QUIZ_TYPE_FOUR_CHOICES_QUIZ = 1;
   // 画像並び替えクイズ
   QUIZ_TYPE_SORT_IMAGE_QUIZ = 2;
+  // リアルタイムクイズ
+  QUIZ_TYPE_REALTIME_FOUR_CHOICE_QUIZ = 3;
 }
 
 // クイズ作成リクエスト
