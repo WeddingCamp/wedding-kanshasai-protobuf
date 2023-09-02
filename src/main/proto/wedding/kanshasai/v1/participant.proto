@@ -94,7 +94,7 @@ message ListParticipantsRequest {
   // セッションID
   string session_id = 1;
   // 新郎側・新婦側
-  optional ParticipantType participant_type = 1;
+  optional ParticipantType participant_type = 2;
 }
 
 // 参加者一覧レスポンス
