@@ -76,13 +76,13 @@ message ListSessionQuizzesResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated Choice choices = 4;
+    repeated Choice choice_list = 4;
     // 完了済フラグ
     bool is_completed = 5;
   }
 
   // クイズの配列
-  repeated SessionQuiz quizzes = 1;
+  repeated SessionQuiz quiz_list = 1;
 }
 
 // クイズ選択リクエスト
