@@ -78,13 +78,13 @@ message ListSessionQuizzesResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated Choice choice_list = 4;
+    repeated Choice choices = 4;
     // 完了済フラグ
     bool is_completed = 5;
   }
 
   // クイズの配列
-  repeated SessionQuiz quiz_list = 1;
+  repeated SessionQuiz session_quizzes = 1;
 }
 
 // イントロダクション選択リクエスト
@@ -92,7 +92,7 @@ message SetNextIntroductionRequest {
   // セッションID
   string session_id = 1;
   // イントロダクション画面種別
-  IntroductionScreenType screen_type = 2;
+  IntroductionScreenType introduction_screen_type = 2;
 }
 
 // クイズ選択レスポンス
@@ -150,7 +150,7 @@ message ShowQuizResultRequest {
   // セッションID
   string session_id = 1;
   // 表示したい結果表示画面の種類
-  QuizResultScreenType screen_type = 2;
+  QuizResultScreenType quiz_result_screen_type = 2;
 }
 
 // クイズ結果画面表示レスポンス
@@ -186,7 +186,7 @@ message ShowSessionResultRequest {
   // セッションID
   string session_id = 1;
   // 結果画面種別
-  SessionResultScreenType screen_type = 2;
+  SessionResultScreenType session_result_screen_type = 2;
 }
 
 // 結果画面表示レスポンス
@@ -215,7 +215,7 @@ message StreamSessionEventRequest {
 // 管理画面向けストリームレスポンス
 message StreamSessionEventResponse {
   // イベント種別
-  SessionEventType event_type = 1;
+  SessionEventType screen_event_type = 1;
 
   // メッセージイベントBody
   message MessageEventBody {

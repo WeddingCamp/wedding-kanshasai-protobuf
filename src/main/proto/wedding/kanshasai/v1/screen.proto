@@ -68,7 +68,7 @@ message StreamScreenEventRequest {
 // スクリーン向けイベントレスポンス
 message StreamScreenEventResponse {
   // イベント種別
-  ScreenEventType event_type = 1;
+  ScreenEventType screen_event_type = 1;
 
   // 選択肢オブジェクト
   message Choice {
@@ -87,7 +87,7 @@ message StreamScreenEventResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated Choice choice_list = 4;
+    repeated Choice choices = 4;
   }
 
   // クイズ結果発表イベントBody
@@ -103,7 +103,7 @@ message StreamScreenEventResponse {
     }
 
     // 選択肢の結果の配列
-    repeated ChoiceWithCount choice_result_list = 1;
+    repeated ChoiceWithCount choices_with_count = 1;
   }
 
   // クイズ結果発表イベントBody
@@ -121,7 +121,7 @@ message StreamScreenEventResponse {
     }
 
     // 選択肢の結果の配列
-    repeated ChoiceWithResult choice_result_list = 1;
+    repeated ChoiceWithResult choices_with_result = 1;
   }
 
   // 早押し一位表示イベントBody
@@ -136,8 +136,8 @@ message StreamScreenEventResponse {
       string time = 3;
     }
 
-    // 参加者のスコアの配列
-    repeated ParticipantQuizTime participant_quiz_time_list = 1;
+    // 参加者の回答時間の配列
+    repeated ParticipantQuizTime participant_quiz_times = 1;
   }
 
   // 中間/最終結果発表イベントBody
@@ -153,7 +153,7 @@ message StreamScreenEventResponse {
     }
 
     // 参加者のスコアの配列
-    repeated ParticipantSessionScore participant_session_score_list = 1;
+    repeated ParticipantSessionScore participant_session_scores = 1;
   }
 
   // 終了イベントBody
