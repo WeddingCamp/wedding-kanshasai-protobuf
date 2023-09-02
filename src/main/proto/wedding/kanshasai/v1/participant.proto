@@ -16,7 +16,7 @@ service ParticipantService {
   // 参加者更新（管理側用）
   rpc UpdateParticipant(UpdateParticipantRequest) returns (UpdateParticipantResponse);
   // 参加者一覧
-  rpc ListParticipant(ListParticipantRequest) returns (ListParticipantResponse);
+  rpc ListParticipants(ListParticipantsRequest) returns (ListParticipantsResponse);
   // 参加者登録
   rpc RegisterParticipant(RegisterParticipantRequest) returns (RegisterParticipantResponse);
   // 参加者向けイベントストリーム
@@ -72,13 +72,13 @@ message UpdateParticipantResponse {
 }
 
 // 参加者一覧リクエスト
-message ListParticipantRequest {
+message ListParticipantsRequest {
   // セッションID
   string session_id = 1;
 }
 
 // 参加者一覧レスポンス
-message ListParticipantResponse {
+message ListParticipantsResponse {
   // 参加者オブジェクト
   message Participant {
     // 参加者ID
@@ -92,7 +92,7 @@ message ListParticipantResponse {
   }
 
   // 参加者の配列
-  repeated Participant participants = 1;
+  repeated Participant participant_list = 1;
 }
 
 // 参加者登録リクエスト
@@ -163,7 +163,7 @@ message StreamParticipantEventResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated Choice choices = 4;
+    repeated Choice choice_list = 4;
   }
 
   // 回答開始イベントBody（PreQuizで取得できていなくても動かせるよう全データを載せる）
@@ -183,7 +183,7 @@ message StreamParticipantEventResponse {
     // クイズ種別
     QuizType quiz_type = 3;
     // クイズ選択肢
-    repeated Choice choices = 4;
+    repeated Choice choice_list = 4;
   }
 
   // 締め切りイベントBody
@@ -231,7 +231,7 @@ message StreamParticipantEventResponse {
   // 現在状態イベントBody
   message CurrentStateEvent {
     // ゲームが進行中かどうか
-    bool is_game_in_progress = 1;
+    bool is_game_in_progres_list = 1;
   }
 
   // イベントBody
