@@ -25,6 +25,16 @@ service ParticipantService {
   rpc SetAnswer(SetAnswerRequest) returns (SetAnswerResponse);
 }
 
+// 参加者種別
+enum ParticipantType {
+  // 未定義
+  PARTICIPANT_TYPE_UNSPECIFIED = 0;
+  // 新郎側
+  PARTICIPANT_TYPE_GROOM = 1;
+  // 新婦側
+  PARTICIPANT_TYPE_BRIDE = 2;
+}
+
 // 参加者作成リクエスト
 message CreateParticipantRequest {
   // セッションID
@@ -33,6 +43,8 @@ message CreateParticipantRequest {
   string name = 2;
   // 画像ファイルID
   optional string image_id = 3;
+  // 新郎側・新婦側
+  ParticipantType participant_type = 4;
 }
 
 // 参加者作成レスポンス
