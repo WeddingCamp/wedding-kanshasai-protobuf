@@ -167,10 +167,10 @@ message StreamScreenEventResponse {
     bool is_visible = 1;
   }
 
-  // イントロダクション画像表示Body
-  message IntroductionScreenEvent {
-    // イントロダクション画像種別
-    IntroductionScreenType introduction_screen_type = 1;
+  // イントロダクション表示Body
+  message IntroductionEvent {
+    // イントロダクション種別
+    IntroductionType introduction_type = 1;
   }
 
   // イベントBody
@@ -194,6 +194,6 @@ message StreamScreenEventResponse {
     // カバー画像表示イベントBody
     CoverScreenEvent cover_screen_event = 18;
     // イントロダクション表示イベントBody
-    IntroductionScreenEvent introduction_screen_event = 19;
+    IntroductionEvent introduction_event = 19;
   }
 }
