@@ -183,6 +183,18 @@ enum ParticipantEventType {
   PARTICIPANT_EVENT_TYPE_CURRENT_STATE = 9;
 }
 
+// ゲームの状態を表すステート
+enum GameState {
+  // 未定義
+  GAME_STATE_UNSPECIFIED = 0;
+  // 開始前状態
+  GAME_STATE_BEFORE_START = 1;
+  // ゲーム中状態
+  GAME_STATE_DURING_THE_GAME = 2;
+  // 終了済状態
+  GAME_STATE_FINISHED = 3;
+}
+
 // 参加者向けイベントストリームレスポンス
 message StreamParticipantEventResponse {
   // イベント種別
@@ -274,8 +286,8 @@ message StreamParticipantEventResponse {
 
   // 現在状態イベントBody
   message CurrentStateEvent {
-    // ゲームが進行中かどうか
-    bool is_game_in_progress = 1;
+    // ゲームの進行状態
+    GameState game_state = 1;
   }
 
   // イベントBody
