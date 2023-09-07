@@ -18,7 +18,7 @@ service SessionService {
   // セッションに紐づいたクイズ一覧
   rpc ListSessionQuizzes(ListSessionQuizzesRequest) returns (ListSessionQuizzesResponse);
   // イントロダクション選択
-  rpc SetNextIntroduction(SetNextIntroductionRequest) returns (SetNextIntroductionResponse);
+  rpc SetIntroduction(SetIntroductionRequest) returns (SetIntroductionResponse);
   // クイズ選択
   rpc SetNextQuiz(SetNextQuizRequest) returns (SetNextQuizResponse);
   // クイズ開始（カウントダウンスタート）
@@ -88,15 +88,15 @@ message ListSessionQuizzesResponse {
 }
 
 // イントロダクション選択リクエスト
-message SetNextIntroductionRequest {
+message SetIntroductionRequest {
   // セッションID
   string session_id = 1;
-  // イントロダクション画面種別
-  IntroductionScreenType introduction_screen_type = 2;
+  // イントロダクション種別
+  IntroductionType introduction_type = 2;
 }
 
-// クイズ選択レスポンス
-message SetNextIntroductionResponse {
+// イントロダクション選択レスポンス
+message SetIntroductionResponse {
   // Empty
 }
 

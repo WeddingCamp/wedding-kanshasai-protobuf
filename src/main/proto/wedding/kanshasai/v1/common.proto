@@ -19,14 +19,14 @@ enum MessageLevel {
   MESSAGE_LEVEL_ERROR = 3;
 }
 
-// イントロダクション画面種別
-enum IntroductionScreenType {
+// イントロダクション種別
+enum IntroductionType {
   // 未定義
-  INTRODUCTION_SCREEN_TYPE_UNSPECIFIED = 0;
-  // ようこそスクリーン
-  INTRODUCTION_SCREEN_TYPE_WELCOME = 1;
-  // ルール説明スクリーン
-  INTRODUCTION_SCREEN_TYPE_RULE = 2;
-  // ロゴスクリーン
-  INTRODUCTION_SCREEN_TYPE_LOGO = 3;
+  INTRODUCTION_TYPE_UNSPECIFIED = 0;
+  // ようこそ
+  INTRODUCTION_TYPE_WELCOME = 1;
+  // ルール説明
+  INTRODUCTION_TYPE_RULE = 2;
+  // ロゴ
+  INTRODUCTION_TYPE_LOGO = 3;
 }
