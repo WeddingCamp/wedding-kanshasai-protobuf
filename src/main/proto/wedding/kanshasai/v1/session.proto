@@ -143,6 +143,8 @@ enum QuizResultScreenType {
   QUIZ_RESULT_SCREEN_TYPE_VOTE_LIST = 1;
   // 結果表示
   QUIZ_RESULT_SCREEN_TYPE_RESULT = 2;
+  // 早押しランキング表示
+  QUIZ_RESULT_SCREEN_TYPE_FASTEST_RANKING = 3;
 }
 
 // クイズ結果画面表示リクエスト
