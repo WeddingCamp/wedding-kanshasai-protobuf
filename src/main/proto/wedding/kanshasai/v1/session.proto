@@ -19,8 +19,12 @@ service SessionService {
   rpc ListSessionQuizzes(ListSessionQuizzesRequest) returns (ListSessionQuizzesResponse);
   // イントロダクション選択
   rpc SetIntroduction(SetIntroductionRequest) returns (SetIntroductionResponse);
+  // イントロダクション完了
+  rpc FinishIntroduction(FinishIntroductionRequest) returns (FinishIntroductionResponse);
   // クイズ選択
   rpc SetNextQuiz(SetNextQuizRequest) returns (SetNextQuizResponse);
+  // クイズ表示
+  rpc ShowQuiz(ShowQuizRequest) returns (ShowQuizResponse);
   // クイズ開始（カウントダウンスタート）
   rpc StartQuiz(StartQuizRequest) returns (StartQuizResponse);
   // クイズ中止（このクイズに関連する情報を破棄）
@@ -31,6 +35,8 @@ service SessionService {
   rpc SetCoverScreen(SetCoverScreenRequest) returns (SetCoverScreenResponse);
   // 結果画面表示
   rpc ShowSessionResult(ShowSessionResultRequest) returns (ShowSessionResultResponse);
+  // セッション終了
+  rpc FinishSession(FinishSessionRequest) returns (FinishSessionResponse);
   // 管理画面向けイベントストリーム
   rpc StreamSessionEvent(StreamSessionEventRequest) returns (stream StreamSessionEventResponse);
 }
@@ -100,6 +106,17 @@ message SetIntroductionResponse {
   // Empty
 }
 
+// イントロダクション完了リクエスト
+message FinishIntroductionRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// イントロダクション完了レスポンス
+message FinishIntroductionResponse {
+  // Empty
+}
+
 // クイズ選択リクエスト
 message SetNextQuizRequest {
   // セッションID
@@ -110,6 +127,17 @@ message SetNextQuizRequest {
 
 // クイズ選択レスポンス
 message SetNextQuizResponse {
+  // Empty
+}
+
+// クイズ表示リクエスト
+message ShowQuizRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// クイズ表示レスポンス
+message ShowQuizResponse {
   // Empty
 }
 
@@ -193,6 +221,17 @@ message ShowSessionResultRequest {
 
 // 結果画面表示レスポンス
 message ShowSessionResultResponse {
+  // Empty
+}
+
+// セッション終了リクエスト
+message FinishSessionRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// セッション終了レスポンス
+message FinishSessionResponse {
   // Empty
 }
 
