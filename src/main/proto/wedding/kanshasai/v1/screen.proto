@@ -14,6 +14,8 @@ option java_package = "wedding.kanshasai.v1";
 service ScreenService {
   // バックエンド/管理画面にメッセージ送信
   rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  // クイズ終了
+  rpc FinishQuiz(FinishQuizRequest) returns (FinishQuizResponse);
   // スクリーン向けイベントストリーム
   rpc StreamScreenEvent(StreamScreenEventRequest) returns (stream StreamScreenEventResponse);
 }
@@ -33,12 +35,25 @@ message SendMessageResponse {
   // Empty
 }
 
+// クイズ終了リクエスト
+message FinishQuizRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// クイズ終了レスポンス
+message FinishQuizResponse {
+  // Empty
+}
+
 // スクリーン向けイベント種別
 enum ScreenEventType {
   // 未定義
   SCREEN_EVENT_TYPE_UNSPECIFIED = 0;
+  // クイズ情報イベント
+  SCREEN_EVENT_TYPE_PRE_QUIZ = 1;
   // クイズ表示イベント
-  SCREEN_EVENT_TYPE_QUIZ = 1;
+  SCREEN_EVENT_TYPE_SHOW_QUIZ = 11;
   // クイズ開始イベント
   SCREEN_EVENT_TYPE_QUIZ_START = 2;
   // クイズ回答数表示イベント
