@@ -93,7 +93,7 @@ message StreamScreenEventResponse {
     string body = 2;
   }
 
-  // クイズ表示/開始イベントBody
+  // クイズ情報/表示/開始イベントBody
   message QuizEvent {
     // クイズID
     string quiz_id = 1;
@@ -190,8 +190,10 @@ message StreamScreenEventResponse {
 
   // イベントBody
   oneof event_body {
+    // クイズ情報イベントBody
+    QuizEvent pre_quiz_event = 20;
     // クイズ表示イベントBody
-    QuizEvent quiz_event = 10;
+    QuizEvent show_quiz_event = 10;
     // クイズ開始イベントBody
     QuizEvent quiz_start_event = 11;
     // クイズ回答数表示イベントBody
