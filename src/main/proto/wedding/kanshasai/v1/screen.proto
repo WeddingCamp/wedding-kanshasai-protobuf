@@ -14,6 +14,8 @@ option java_package = "wedding.kanshasai.v1";
 service ScreenService {
   // バックエンド/管理画面にメッセージ送信
   rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+  // クイズ終了
+  rpc FinishQuiz(FinishQuizRequest) returns (FinishQuizResponse);
   // スクリーン向けイベントストリーム
   rpc StreamScreenEvent(StreamScreenEventRequest) returns (stream StreamScreenEventResponse);
 }
@@ -30,6 +32,17 @@ message SendMessageRequest {
 
 // メッセージ送信レスポンス
 message SendMessageResponse {
+  // Empty
+}
+
+// クイズ終了リクエスト
+message FinishQuizRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// クイズ終了レスポンス
+message FinishQuizResponse {
   // Empty
 }
 
