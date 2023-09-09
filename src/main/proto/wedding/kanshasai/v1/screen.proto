@@ -116,9 +116,14 @@ message StreamScreenEventResponse {
       // 件数
       string count = 3;
     }
-
     // 選択肢の結果の配列
     repeated ChoiceWithCount choices_with_count = 1;
+    // クイズID
+    string quiz_id = 2;
+    // クイズ問題文
+    string body = 3;
+    // クイズ種別
+    QuizType quiz_type = 4;
   }
 
   // クイズ結果発表イベントBody
@@ -134,9 +139,14 @@ message StreamScreenEventResponse {
       // 正解フラグ
       bool is_correct_choice = 4;
     }
-
     // 選択肢の結果の配列
     repeated ChoiceWithResult choices_with_result = 1;
+    // クイズID
+    string quiz_id = 2;
+    // クイズ問題文
+    string body = 3;
+    // クイズ種別
+    QuizType quiz_type = 4;
   }
 
   // 早押し一位表示イベントBody
@@ -150,7 +160,6 @@ message StreamScreenEventResponse {
       // タイム
       string time = 3;
     }
-
     // 参加者の回答時間の配列
     repeated ParticipantQuizTime participant_quiz_times = 1;
   }
