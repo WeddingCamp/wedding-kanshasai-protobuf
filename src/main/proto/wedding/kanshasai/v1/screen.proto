@@ -114,7 +114,7 @@ message StreamScreenEventResponse {
       // 選択肢Body
       string body = 2;
       // 件数
-      string count = 3;
+      int32 count = 3;
     }
     // 選択肢の結果の配列
     repeated ChoiceWithCount choices_with_count = 1;
@@ -135,7 +135,7 @@ message StreamScreenEventResponse {
       // 選択肢Body
       string body = 2;
       // 件数
-      string count = 3;
+      int32 count = 3;
       // 正解フラグ
       bool is_correct_choice = 4;
     }
