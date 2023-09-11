@@ -158,7 +158,7 @@ message StreamScreenEventResponse {
       // 参加者画像ID
       string participant_image_id = 2;
       // タイム
-      string time = 3;
+      float time = 3;
     }
     // 参加者の回答時間の配列
     repeated ParticipantQuizTime participant_quiz_times = 1;
