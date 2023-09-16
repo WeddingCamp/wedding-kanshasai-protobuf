@@ -43,8 +43,8 @@ message CreateParticipantRequest {
   string session_id = 1;
   // 参加者名
   string name = 2;
-  // 画像ファイルID
-  optional string image_id = 3;
+  // 画像URL
+  optional string image_url = 3;
   // 参加者種別
   ParticipantType participant_type = 4;
 }
@@ -57,8 +57,8 @@ message CreateParticipantResponse {
   string session_id = 2;
   // 参加者名
   string name = 3;
-  // 画像ファイルID
-  optional string image_id = 4;
+  // 画像URL
+  optional string image_url = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
 }
@@ -77,8 +77,8 @@ message GetParticipantResponse {
   string session_id = 2;
   // 参加者名
   string name = 3;
-  // 画像ファイルID
-  optional string image_id = 4;
+  // 画像URL
+  optional string image_url = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
 }
@@ -91,8 +91,8 @@ message UpdateParticipantRequest {
   string session_id = 2;
   // 参加者名
   string name = 3;
-  // 画像ファイルID
-  optional string image_id = 4;
+  // 画像URL
+  optional string image_url = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
 }
@@ -105,8 +105,8 @@ message UpdateParticipantResponse {
   string session_id = 2;
   // 参加者名
   string name = 3;
-  // 画像ファイルID
-  optional string image_id = 4;
+  // 画像URL
+  optional string image_url = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
 }
@@ -129,8 +129,8 @@ message ListParticipantsResponse {
     string session_id = 2;
     // 参加者名
     string name = 3;
-    // 画像ファイルID
-    optional string image_id = 4;
+    // 画像URL
+    optional string image_url = 4;
     // 参加者種別
     ParticipantType participant_type = 5;
   }
@@ -269,8 +269,8 @@ message StreamParticipantEventResponse {
     message ParticipantSessionScore {
       // 参加者名
       string participant_name = 1;
-      // 参加者画像ID
-      string participant_image_id = 2;
+      // 参加者画像URL
+      string participant_image_url = 2;
       // スコア
       string score = 3;
     }
