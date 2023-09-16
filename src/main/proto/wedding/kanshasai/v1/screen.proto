@@ -72,6 +72,8 @@ enum ScreenEventType {
   SCREEN_EVENT_TYPE_FINISH = 9;
   // イントロダクション表示イベント
   SCREEN_EVENT_TYPE_INTRODUCTION = 10;
+  // クイズキャンセルイベント
+  SCREEN_EVENT_TYPE_CANCEL_QUIZ = 12;
 }
 
 // スクリーン向けイベントリクエスト
@@ -197,6 +199,11 @@ message StreamScreenEventResponse {
     IntroductionType introduction_type = 1;
   }
 
+  // クイズキャンセルイベントBody
+  message CancelQuizEvent {
+    // Empty
+  }
+
   // イベントBody
   oneof event_body {
     // クイズ情報イベントBody
@@ -221,5 +228,7 @@ message StreamScreenEventResponse {
     CoverScreenEvent cover_screen_event = 18;
     // イントロダクション表示イベントBody
     IntroductionEvent introduction_event = 19;
+    // クイズキャンセルイベントBody
+    CancelQuizEvent cancel_quiz_event = 21;
   }
 }
