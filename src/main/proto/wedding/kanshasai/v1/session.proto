@@ -34,7 +34,7 @@ service SessionService {
   // クイズ結果表示
   rpc ShowQuizResult(ShowQuizResultRequest) returns (ShowQuizResultResponse);
   // カバー表示
-  rpc SetCoverScreen(SetCoverRequest) returns (SetCoverResponse);
+  rpc SetCover(SetCoverRequest) returns (SetCoverResponse);
   // 結果表示
   rpc ShowSessionResult(ShowSessionResultRequest) returns (ShowSessionResultResponse);
   // セッション終了
