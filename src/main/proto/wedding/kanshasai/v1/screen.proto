@@ -72,6 +72,8 @@ enum ScreenEventType {
   SCREEN_EVENT_TYPE_FINISH = 9;
   // イントロダクション表示イベント
   SCREEN_EVENT_TYPE_INTRODUCTION = 10;
+  // クイズキャンセルイベント
+  SCREEN_EVENT_TYPE_CANCEL_QUIZ = 12;
 }
 
 // スクリーン向けイベントリクエスト
@@ -155,8 +157,8 @@ message StreamScreenEventResponse {
     message ParticipantQuizTime {
       // 参加者名
       string participant_name = 1;
-      // 参加者画像ID
-      string participant_image_id = 2;
+      // 参加者画像URL
+      optional string participant_image_url = 2;
       // タイム
       float time = 3;
     }
@@ -170,8 +172,8 @@ message StreamScreenEventResponse {
     message ParticipantSessionScore {
       // 参加者名
       string participant_name = 1;
-      // 参加者画像ID
-      string participant_image_id = 2;
+      // 参加者画像URL
+      optional string participant_image_url = 2;
       // スコア
       string score = 3;
     }
@@ -195,6 +197,11 @@ message StreamScreenEventResponse {
   message IntroductionEvent {
     // イントロダクション種別
     IntroductionType introduction_type = 1;
+  }
+
+  // クイズキャンセルイベントBody
+  message CancelQuizEvent {
+    // Empty
   }
 
   // イベントBody
@@ -221,5 +228,7 @@ message StreamScreenEventResponse {
     CoverScreenEvent cover_screen_event = 18;
     // イントロダクション表示イベントBody
     IntroductionEvent introduction_event = 19;
+    // クイズキャンセルイベントBody
+    CancelQuizEvent cancel_quiz_event = 21;
   }
 }
