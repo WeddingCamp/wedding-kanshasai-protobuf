@@ -65,6 +65,8 @@ message CreateSessionResponse {
 message ListSessionsRequest {
   // イベントID
   string event_id = 1;
+  // 終了済みセッションも含めるか
+  bool include_finished = 2;
 }
 
 // セッション一覧レスポンス
