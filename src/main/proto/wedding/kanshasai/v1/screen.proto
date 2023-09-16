@@ -156,7 +156,7 @@ message StreamScreenEventResponse {
       // 参加者名
       string participant_name = 1;
       // 参加者画像URL
-      string participant_image_url = 2;
+      optional string participant_image_url = 2;
       // タイム
       float time = 3;
     }
@@ -171,7 +171,7 @@ message StreamScreenEventResponse {
       // 参加者名
       string participant_name = 1;
       // 参加者画像URL
-      string participant_image_url = 2;
+      optional string participant_image_url = 2;
       // スコア
       string score = 3;
     }
