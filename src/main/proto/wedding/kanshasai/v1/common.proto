@@ -7,6 +7,25 @@ option java_multiple_files = true;
 option java_outer_classname = "CommonProto";
 option java_package = "wedding.kanshasai.v1";
 
+// 汎用的な機能を提供するサービス
+service CommonService {
+  // アップロードに用いるPresigned URLを生成する
+  rpc GeneratePresignedUrl(GeneratePresignedUrlRequest) returns (GeneratePresignedUrlResponse);
+}
+
+// Presigned URL生成リクエスト
+message GeneratePresignedUrlRequest {
+  // Empty
+}
+
+// Presigned URL生成レスポンス
+message GeneratePresignedUrlResponse {
+  // Presigned URL
+  string presigned_url = 1;
+  // File Id
+  string file_id = 2;
+}
+
 // メッセージレベル種別
 enum MessageLevel {
   // 未定義
