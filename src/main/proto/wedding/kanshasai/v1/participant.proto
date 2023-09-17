@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package wedding.kanshasai.v1;
 
-import "wedding/kanshasai/v1/quiz.proto";
-
 option csharp_namespace = "WeddingCamp.ProtoBuf";
 option java_multiple_files = true;
 option java_outer_classname = "ParticipantProto";
@@ -21,8 +19,6 @@ service ParticipantService {
   rpc ListParticipants(ListParticipantsRequest) returns (ListParticipantsResponse);
   // 参加者登録
   rpc RegisterParticipant(RegisterParticipantRequest) returns (RegisterParticipantResponse);
-  // 参加者向けイベントストリーム
-  rpc StreamParticipantEvent(StreamParticipantEventRequest) returns (stream StreamParticipantEventResponse);
   // 回答登録
   rpc SetAnswer(SetAnswerRequest) returns (SetAnswerResponse);
 }
@@ -44,7 +40,7 @@ message CreateParticipantRequest {
   // 参加者名
   string name = 2;
   // 画像URL
-  optional string image_url = 3;
+  optional string image_id = 3;
   // 参加者種別
   ParticipantType participant_type = 4;
 }
@@ -92,7 +88,7 @@ message UpdateParticipantRequest {
   // 参加者名
   string name = 3;
   // 画像URL
-  optional string image_url = 4;
+  optional string image_id = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
 }
@@ -151,166 +147,6 @@ message RegisterParticipantRequest {
 // 参加者登録レスポンス
 message RegisterParticipantResponse {
   // Empty
-}
-
-// 参加者向けイベントストリームリクエスト
-message StreamParticipantEventRequest {
-  // 参加者ID
-  string participant_id = 1;
-}
-
-// 参加者クライアントに送られるイベント種別
-enum ParticipantEventType {
-  // 未定義
-  PARTICIPANT_EVENT_TYPE_UNSPECIFIED = 0;
-  // クイズ開始イベント（クイズや選択肢画像などをプリロードするためのイベント）
-  PARTICIPANT_EVENT_TYPE_PRE_QUIZ = 1;
-  // 回答開始イベント
-  PARTICIPANT_EVENT_TYPE_QUIZ_START = 2;
-  // 締め切りイベント
-  PARTICIPANT_EVENT_TYPE_QUIZ_TIME_UP = 3;
-  // クイズ結果イベント
-  PARTICIPANT_EVENT_TYPE_QUIZ_RESULT = 4;
-  // 勝者イベント
-  PARTICIPANT_EVENT_TYPE_WINNER = 5;
-  // 中間結果表示イベント
-  PARTICIPANT_EVENT_TYPE_INTERIM_RESULT = 6;
-  // 最終結果表示イベント
-  PARTICIPANT_EVENT_TYPE_RESULT = 7;
-  // 終了イベント
-  PARTICIPANT_EVENT_TYPE_FINISH = 8;
-  // 現在状態イベント
-  PARTICIPANT_EVENT_TYPE_CURRENT_STATE = 9;
-}
-
-// ゲームの状態を表すステート
-enum GameState {
-  // 未定義
-  GAME_STATE_UNSPECIFIED = 0;
-  // 開始前状態
-  GAME_STATE_BEFORE_START = 1;
-  // ゲーム中状態
-  GAME_STATE_DURING_THE_GAME = 2;
-  // 終了済状態
-  GAME_STATE_FINISHED = 3;
-}
-
-// 参加者向けイベントストリームレスポンス
-message StreamParticipantEventResponse {
-  // イベント種別
-  ParticipantEventType participant_event_type = 1;
-  // 正答数
-  int32 correct_answer_count = 2;
-
-  // クイズ開始イベントBody
-  message PreQuizEvent {
-    // 選択肢オブジェクト
-    message Choice {
-      // 選択肢ID
-      string choice_id = 1;
-      // 選択肢Body
-      string body = 2;
-    }
-
-    // クイズID
-    string quiz_id = 1;
-    // クイズ問題文
-    string body = 2;
-    // クイズ種別
-    QuizType quiz_type = 3;
-    // クイズ選択肢
-    repeated Choice choices = 4;
-  }
-
-  // 回答開始イベントBody（PreQuizで取得できていなくても動かせるよう全データを載せる）
-  message QuizStartEvent {
-    // 選択肢オブジェクト
-    message Choice {
-      // 選択肢ID
-      string choice_id = 1;
-      // 選択肢Body
-      string body = 2;
-    }
-
-    // クイズID
-    string quiz_id = 1;
-    // クイズ問題文
-    string body = 2;
-    // クイズ種別
-    QuizType quiz_type = 3;
-    // クイズ選択肢
-    repeated Choice choices = 4;
-  }
-
-  // 締め切りイベントBody
-  message QuizTimeUpEvent {
-    // クイズID
-    string quiz_id = 1;
-  }
-
-  // クイズ結果イベントBody
-  message QuizResultEvent {
-    // クイズID
-    string quiz_id = 1;
-    // 正解フラグ
-    bool is_correct = 2;
-    // 回答フラグ
-    bool is_answered = 3;
-  }
-
-  // 勝者イベントBody
-  message WinnerEvent {
-    // Empty
-  }
-
-  // 中間/最終結果発表イベントBody
-  message SessionResultEvent {
-    // 参加者のスコア
-    message ParticipantSessionScore {
-      // 参加者名
-      string participant_name = 1;
-      // 参加者画像URL
-      optional string participant_image_url = 2;
-      // スコア
-      string score = 3;
-    }
-
-    // 参加者のスコアの配列
-    repeated ParticipantSessionScore participant_session_scores = 1;
-  }
-
-  // 終了イベントBody
-  message FinishEvent {
-    // Empty
-  }
-
-  // 現在状態イベントBody
-  message CurrentStateEvent {
-    // ゲームの進行状態
-    GameState game_state = 1;
-  }
-
-  // イベントBody
-  oneof event_body {
-    // クイズ開始イベントBody
-    PreQuizEvent pre_quiz_event_body = 10;
-    // クイズ開始イベントBody
-    QuizStartEvent quiz_start_event_body = 11;
-    // 締め切りイベントBody
-    QuizTimeUpEvent quiz_time_up_event_body = 12;
-    // クイズ結果イベントBody
-    QuizResultEvent quiz_result_event_body = 13;
-    // 勝者イベントBody
-    WinnerEvent winner_event_body = 14;
-    // 中間結果表示イベントBody
-    SessionResultEvent interim_result_event = 15;
-    // 最終結果表示イベントBody
-    SessionResultEvent result_event = 16;
-    // 終了イベントBody
-    FinishEvent finish_event = 17;
-    // 現在状態イベントBody
-    CurrentStateEvent current_state_event = 18;
-  }
 }
 
 // 回答登録リクエスト
