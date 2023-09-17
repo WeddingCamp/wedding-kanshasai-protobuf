@@ -111,12 +111,6 @@ message StreamEventResponse {
     IntroductionType introduction_type = 1;
   }
 
-  // 現在状態イベントBody
-  message SessionState {
-    // ゲームの進行状態
-    GameState game_state = 1;
-  }
-
   // イベント種別
   EventType event_type = 1;
   // 正答数（STREAM_TYPE_PARTICIPANTのみ）
@@ -138,8 +132,6 @@ message StreamEventResponse {
     Message message = 14;
     // カバー（COVER）
     Cover cover = 15;
-    // 現在状態（CURRENT_STATE）
-    SessionState session_state = 16;
   }
 }
 
