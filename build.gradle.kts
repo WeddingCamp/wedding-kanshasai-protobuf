@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "wedding.kanshasai"
-version = "0.0.16"
+version = "0.1.0"
 
 repositories {
     mavenCentral()
