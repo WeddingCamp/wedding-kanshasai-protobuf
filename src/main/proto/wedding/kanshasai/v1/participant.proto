@@ -40,7 +40,7 @@ message CreateParticipantRequest {
   // 参加者名
   string name = 2;
   // 画像URL
-  optional string image_url = 3;
+  optional string image_id = 3;
   // 参加者種別
   ParticipantType participant_type = 4;
 }
@@ -88,7 +88,7 @@ message UpdateParticipantRequest {
   // 参加者名
   string name = 3;
   // 画像URL
-  optional string image_url = 4;
+  optional string image_id = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
 }
