@@ -105,10 +105,18 @@ message StreamEventResponse {
     bool is_visible = 1;
   }
 
-  // イントロダクション表示Body
+  // イントロダクション
   message IntroductionEvent {
     // イントロダクション種別
     IntroductionType introduction_type = 1;
+  }
+
+  // 現在状態
+  message SessionState {
+    // ゲームの進行状態
+    SimpleSessionState simple_session_state = 1;
+    // ゲームの進行状態（バックエンドで定義しているより詳細なステート）
+    string session_state = 2;
   }
 
   // イベント種別
@@ -132,6 +140,8 @@ message StreamEventResponse {
     Message message = 14;
     // カバー（COVER）
     Cover cover = 15;
+    // 現在状態（CURRENT_STATE）
+    SessionState session_state = 16;
   }
 }
 
@@ -194,7 +204,7 @@ enum EventType {
 }
 
 // ゲームの状態を表すステート
-enum GameState {
+enum SimpleSessionState {
   // 未定義
   GAME_STATE_UNSPECIFIED = 0;
   // 開始前状態
