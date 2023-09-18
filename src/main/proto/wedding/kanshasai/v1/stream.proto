@@ -22,6 +22,8 @@ message StreamEventRequest {
   string session_id = 1;
   // ストリーム種別
   StreamType type = 2;
+  // 参加者ID
+  optional string participant_id = 3;
 }
 
 // イベントストリームレスポンス
