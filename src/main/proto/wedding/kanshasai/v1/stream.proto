@@ -18,6 +18,7 @@ service StreamService {
 
 // イベントストリームリクエスト
 message StreamEventRequest {
+  // クライアントを識別するID
   oneof id {
     // セッションID
     string session_id = 1;
