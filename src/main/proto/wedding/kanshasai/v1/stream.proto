@@ -18,12 +18,15 @@ service StreamService {
 
 // イベントストリームリクエスト
 message StreamEventRequest {
-  // セッションID
-  string session_id = 1;
+  // クライアントを識別するID
+  oneof id {
+    // セッションID
+    string session_id = 1;
+    // 参加者ID
+    string participant_id = 2;
+  }
   // ストリーム種別
-  StreamType type = 2;
-  // 参加者ID
-  optional string participant_id = 3;
+  StreamType type = 3;
 }
 
 // イベントストリームレスポンス
