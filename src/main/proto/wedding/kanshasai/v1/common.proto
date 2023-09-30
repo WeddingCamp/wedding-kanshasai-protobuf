@@ -49,3 +49,13 @@ enum IntroductionType {
   // ロゴ
   INTRODUCTION_TYPE_LOGO = 3;
 }
+
+// 参加者種別
+enum ParticipantType {
+  // 未定義
+  PARTICIPANT_TYPE_UNSPECIFIED = 0;
+  // 新郎側
+  PARTICIPANT_TYPE_GROOM = 1;
+  // 新婦側
+  PARTICIPANT_TYPE_BRIDE = 2;
+}

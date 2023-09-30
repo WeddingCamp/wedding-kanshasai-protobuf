@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package wedding.kanshasai.v1;
 
+import "wedding/kanshasai/v1/common.proto";
+
 option csharp_namespace = "WeddingCamp.ProtoBuf";
 option java_multiple_files = true;
 option java_outer_classname = "ParticipantProto";
@@ -21,16 +23,6 @@ service ParticipantService {
   rpc RegisterParticipant(RegisterParticipantRequest) returns (RegisterParticipantResponse);
   // 回答登録
   rpc SetAnswer(SetAnswerRequest) returns (SetAnswerResponse);
-}
-
-// 参加者種別
-enum ParticipantType {
-  // 未定義
-  PARTICIPANT_TYPE_UNSPECIFIED = 0;
-  // 新郎側
-  PARTICIPANT_TYPE_GROOM = 1;
-  // 新婦側
-  PARTICIPANT_TYPE_BRIDE = 2;
 }
 
 // 参加者作成リクエスト
@@ -129,6 +121,8 @@ message ListParticipantsResponse {
     optional string image_url = 4;
     // 参加者種別
     ParticipantType participant_type = 5;
+    // 接続済みかどうか
+    bool is_connected = 6;
   }
 
   // 参加者の配列
