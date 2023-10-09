@@ -177,32 +177,29 @@ message StreamEventResponse {
   // 参加者の配列（UPDATE_PARTICIPANT）
   repeated Participant participants = 3;
 
-  // イベントBody
-  oneof event_body {
-    // イントロダクション表示イベントBody
-    IntroductionEvent introduction_event = 10;
+  // イントロダクション表示イベントBody
+  IntroductionEvent introduction_event = 10;
 
-    // クイズ（PRE_QUIZ / SHOW_QUIZ / START_QUIZ / QUIZ_TIME_UP / QUIZ_ANSWER_LIST / QUIZ_RESULT）
-    Quiz quiz = 11;
-    // 早押しランキング（QUIZ_SPEED_RANKING）
-    SpeedRanking speed_ranking = 12;
+  // クイズ（PRE_QUIZ / SHOW_QUIZ / START_QUIZ / QUIZ_TIME_UP / QUIZ_ANSWER_LIST / QUIZ_RESULT）
+  Quiz quiz = 11;
+  // 早押しランキング（QUIZ_SPEED_RANKING）
+  SpeedRanking speed_ranking = 12;
 
-    // メッセージ（MESSAGE）
-    Message message = 14;
-    // カバー（COVER）
-    Cover cover = 15;
-    // 現在状態（CURRENT_STATE）
-    SessionState session_state = 16;
+  // メッセージ（MESSAGE）
+  Message message = 14;
+  // カバー（COVER）
+  Cover cover = 15;
+  // 現在状態（CURRENT_STATE）
+  SessionState session_state = 16;
 
-    // 結果発表タイトル（RESULT_TITLE）
-    ResultTitle result_title = 17;
-    // 結果発表ランキングタイトル（RESULT_RANKING_TITLE）
-    ResultRankingTitle result_ranking_title = 18;
-    // 結果発表ランキング（RESULT_RANKING）
-    ResultRanking result_ranking = 19;
-    // 結果発表プレゼント（RESULT_PRESENT）
-    ResultPresent result_present = 20;
-  }
+  // 結果発表タイトル（RESULT_TITLE）
+  ResultTitle result_title = 17;
+  // 結果発表ランキングタイトル（RESULT_RANKING_TITLE）
+  ResultRankingTitle result_ranking_title = 18;
+  // 結果発表ランキング（RESULT_RANKING）
+  ResultRanking result_ranking = 19;
+  // 結果発表プレゼント（RESULT_PRESENT）
+  ResultPresent result_present = 20;
 }
 
 // ストリーム種別
