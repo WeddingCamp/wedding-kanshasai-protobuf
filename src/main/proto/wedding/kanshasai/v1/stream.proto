@@ -71,7 +71,7 @@ message StreamEventResponse {
       // 参加者名
       string participant_name = 1;
       // 参加者画像URL
-      optional string participant_image_url = 2;
+      string participant_image_url = 2;
       // タイム
       float time = 3;
     }
@@ -117,7 +117,7 @@ message StreamEventResponse {
     // 参加者名
     string name = 3;
     // 画像URL
-    optional string image_url = 4;
+    string image_url = 4;
     // 参加者種別
     ParticipantType participant_type = 5;
     // 接続済みかどうか
