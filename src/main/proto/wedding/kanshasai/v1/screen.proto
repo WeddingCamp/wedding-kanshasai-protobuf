@@ -13,8 +13,8 @@ option java_package = "wedding.kanshasai.v1";
 service ScreenService {
   // バックエンド/管理画面にメッセージ送信
   rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
-  // クイズ終了
-  rpc FinishQuiz(FinishQuizRequest) returns (FinishQuizResponse);
+  // クイズ締め切り
+  rpc CloseQuiz(CloseQuizRequest) returns (CloseQuizResponse);
 }
 
 // メッセージ送信リクエスト
@@ -32,13 +32,13 @@ message SendMessageResponse {
   // Empty
 }
 
-// クイズ終了リクエスト
-message FinishQuizRequest {
+// クイズ締め切りリクエスト
+message CloseQuizRequest {
   // セッションID
   string session_id = 1;
 }
 
-// クイズ終了レスポンス
-message FinishQuizResponse {
+// クイズ締め切りレスポンス
+message CloseQuizResponse {
   // Empty
 }

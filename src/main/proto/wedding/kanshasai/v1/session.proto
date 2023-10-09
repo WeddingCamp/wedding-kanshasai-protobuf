@@ -37,6 +37,8 @@ service SessionService {
   rpc SetCover(SetCoverRequest) returns (SetCoverResponse);
   // 結果表示
   rpc ShowSessionResult(ShowSessionResultRequest) returns (ShowSessionResultResponse);
+  // クイズ終了
+  rpc FinishQuiz(FinishQuizRequest) returns (FinishQuizResponse);
   // セッション終了
   rpc FinishSession(FinishSessionRequest) returns (FinishSessionResponse);
 }
@@ -245,6 +247,17 @@ message ShowSessionResultRequest {
 
 // 結果画面表示レスポンス
 message ShowSessionResultResponse {
+  // Empty
+}
+
+// クイズ終了リクエスト
+message FinishQuizRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// クイズ終了レスポンス
+message FinishQuizResponse {
   // Empty
 }
 
