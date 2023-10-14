@@ -124,6 +124,20 @@ message StreamEventResponse {
     bool is_connected = 6;
   }
 
+  // 回答情報オブジェクト
+  message Answer {
+    // 参加者名
+    string participant_name = 1;
+    // 回答内容
+    string answer_body = 2;
+    // 正解フラグ
+    bool is_correct_choice = 3;
+    // 参加者画像URL
+    string participant_image_url = 4;
+    // 回答時間
+    float time = 5;
+  }
+
   // 結果発表タイトルオブジェクト
   message ResultTitle {
     // 結果発表種別
@@ -197,6 +211,8 @@ message StreamEventResponse {
   int32 correct_answer_count = 2;
   // 参加者の配列（UPDATE_PARTICIPANT）
   repeated Participant participants = 3;
+  // 回答情報（UPDATE_ANSWER）
+  repeated Answer answers = 4;
 
   // イントロダクション表示イベントBody
   IntroductionEvent introduction_event = 10;
@@ -261,7 +277,8 @@ enum EventType {
   EVENT_TYPE_QUIZ_SPEED_RANKING = 26;
   // 参加者情報更新イベント
   EVENT_TYPE_UPDATE_PARTICIPANT = 27;
-
+  // 回答情報更新イベント
+  EVENT_TYPE_UPDATE_ANSWER = 28;
   // クイズキャンセルイベント
   EVENT_TYPE_CANCEL_QUIZ = 29;
 
