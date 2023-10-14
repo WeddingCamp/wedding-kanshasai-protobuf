@@ -133,8 +133,8 @@ message ListSessionQuizzesResponse {
 message SetIntroductionRequest {
   // セッションID
   string session_id = 1;
-  // イントロダクション種別
-  IntroductionType introduction_type = 2;
+  // イントロダクションID
+  int32 introduction_id = 2;
 }
 
 // イントロダクション選択レスポンス
