@@ -130,10 +130,29 @@ message StreamEventResponse {
     ResultType result_type = 1;
   }
 
+  // 結果発表情報オブジェクト
+  message ResultInfo {
+    // 参加者のスコア
+    message ParticipantSessionScore {
+      // 順位
+      int32 rank = 1;
+      // 参加者名
+      string participant_name = 2;
+      // スコア
+      string score = 3;
+      // 秒数
+      float time = 4;
+    }
+    // 参加者のスコアの配列
+    repeated ParticipantSessionScore participant_session_scores = 1;
+    // 結果発表ランキング種別
+    ResultRankingType result_ranking_type = 2;
+  }
+
   // 結果発表ランキングタイトルオブジェクト
   message ResultRankingTitle {
     // 結果発表ランキングタイトル種別
-    ResultRankingType result_ranking_type = 1;
+    ResultTitleType result_title_type = 1;
     // 順位
     int32 rank = 2;
   }
@@ -150,6 +169,8 @@ message StreamEventResponse {
       string score = 3;
       // 秒数
       float time = 4;
+      // 強調フラグ
+      bool is_emphasis = 5;
     }
 
     // 参加者のスコアの配列
@@ -158,16 +179,16 @@ message StreamEventResponse {
     int32 pre_display_count = 2;
     // 何個表示するか
     int32 display_count = 3;
-    // 強調フラグ
-    bool is_emphasis = 4;
+    // 結果発表ランキング種別
+    ResultRankingType result_ranking_type = 4;
+    // 次のページがあるかどうか
+    bool has_next_page = 5;
   }
 
   // 結果発表プレゼントオブジェクト
   message ResultPresent {
-    // プレゼント名
-    string name = 1;
-    // プレゼント画像URL
-    string image_url = 2;
+    // 順位
+    int32 rank = 1;
   }
 
   // イベント種別
@@ -194,12 +215,14 @@ message StreamEventResponse {
 
   // 結果発表タイトル（RESULT_TITLE）
   ResultTitle result_title = 17;
+  // 結果画面情報（RESULT_INFO）
+  ResultInfo result_info = 18;
   // 結果発表ランキングタイトル（RESULT_RANKING_TITLE）
-  ResultRankingTitle result_ranking_title = 18;
+  ResultRankingTitle result_ranking_title = 19;
   // 結果発表ランキング（RESULT_RANKING）
-  ResultRanking result_ranking = 19;
+  ResultRanking result_ranking = 20;
   // 結果発表プレゼント（RESULT_PRESENT）
-  ResultPresent result_present = 20;
+  ResultPresent result_present = 21;
 }
 
 // ストリーム種別
@@ -253,12 +276,14 @@ enum EventType {
   EVENT_TYPE_FINISH = 40;
   // 結果発表タイトルイベント
   EVENT_TYPE_RESULT_TITLE = 41;
+  // 結果発表情報イベント（STREAM_TYPE_MANAGER）
+  EVENT_TYPE_RESULT_INFO = 42;
   // 結果発表ランキングタイトルイベント
-  EVENT_TYPE_RESULT_RANKING_TITLE = 42;
+  EVENT_TYPE_RESULT_RANKING_TITLE = 43;
   // 結果発表ランキング表示
-  EVENT_TYPE_RESULT_RANKING = 43;
+  EVENT_TYPE_RESULT_RANKING = 44;
   // 結果発表プレゼント表示
-  EVENT_TYPE_RESULT_PRESENT = 44;
+  EVENT_TYPE_RESULT_PRESENT = 45;
 
   // メッセージイベント
   EVENT_TYPE_MESSAGE = 50;
@@ -280,30 +305,4 @@ enum SimpleSessionState {
   SIMPLE_SESSION_STATE_DURING_THE_GAME = 2;
   // 終了済状態
   SIMPLE_SESSION_STATE_FINISHED = 3;
-}
-
-// 結果発表タイトル種別
-enum ResultType {
-  // 未定義
-  RESULT_TYPE_UNSPECIFIED = 0;
-  // 中間結果発表
-  RESULT_TYPE_INTERIM = 1;
-  // 最終結果発表
-  RESULT_TYPE_FINAL = 2;
-}
-
-// 結果発表ランキング種別
-enum ResultRankingType {
-  // 未定義
-  RESULT_RANKING_TYPE_UNSPECIFIED = 0;
-  // ブービー賞
-  RESULT_RANKING_TYPE_BOOBY = 1;
-  // ピタリ賞
-  RESULT_RANKING_TYPE_JUST = 2;
-  // ランク
-  RESULT_RANKING_TYPE_RANK = 3;
-  // ランク ダミー1
-  RESULT_RANKING_TYPE_RANK_DUMMY_1 = 4;
-  // ランク ダミー2
-  RESULT_RANKING_TYPE_RANK_DUMMY_2 = 5;
 }

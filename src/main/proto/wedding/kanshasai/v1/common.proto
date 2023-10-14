@@ -59,3 +59,41 @@ enum ParticipantType {
   // 新婦側
   PARTICIPANT_TYPE_BRIDE = 2;
 }
+
+// 結果発表タイトル種別
+enum ResultType {
+  // 未定義
+  RESULT_TYPE_UNSPECIFIED = 0;
+  // 中間結果発表
+  RESULT_TYPE_INTERIM = 1;
+  // 最終結果発表
+  RESULT_TYPE_FINAL = 2;
+}
+
+// 結果発表タイトル種別
+enum ResultTitleType {
+  // 未定義
+  RESULT_TITLE_TYPE_UNSPECIFIED = 0;
+  // ブービー賞
+  RESULT_RANKING_TYPE_BOOBY = 1;
+  // ぴたり賞
+  RESULT_RANKING_TYPE_JUST = 2;
+  // 順位
+  RESULT_RANKING_TYPE_RANK = 3;
+  // 順位表示用ダミー1（と、言いたいところですが！）
+  RESULT_RANKING_TYPE_RANK_DUMMY_1 = 4;
+  // 順位表示用ダミー2（と思いきや！！）
+  RESULT_RANKING_TYPE_RANK_DUMMY_2 = 5;
+}
+
+// 結果発表ランキング種別
+enum ResultRankingType {
+  // 未定義
+  RANKING_TYPE_UNSPECIFIED = 0;
+  // ブービー賞
+  RANKING_TYPE_BOOBY = 1;
+  // ぴたり賞
+  RANKING_TYPE_JUST = 2;
+  // 順位
+  RANKING_TYPE_RANK = 3;
+}
