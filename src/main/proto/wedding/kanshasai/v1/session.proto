@@ -253,7 +253,7 @@ message ShowSessionResultTitleRequest {
   // セッションID
   string session_id = 1;
   // 結果画面種別
-  ResultTitleType result_title_Type = 2;
+  ResultTitleType result_title_type = 2;
   // 順位（RESULT_RANKING_TYPE_RANK系のみ）
   optional int32 rank = 3;
 }
