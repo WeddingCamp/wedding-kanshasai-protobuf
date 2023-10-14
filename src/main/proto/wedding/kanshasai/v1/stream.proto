@@ -96,8 +96,8 @@ message StreamEventResponse {
 
   // イントロダクション
   message IntroductionEvent {
-    // イントロダクション種別
-    IntroductionType introduction_type = 1;
+    // イントロダクションID
+    int32 introduction_id = 1;
   }
 
   // 現在状態
