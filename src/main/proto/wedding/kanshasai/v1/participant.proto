@@ -150,7 +150,7 @@ message SetAnswerRequest {
   // クイズID
   string quiz_id = 2;
   // クイズ正解データ
-  string correct_answer = 3;
+  string answer = 3;
   // 回答までの時間
   float time = 4;
 }
