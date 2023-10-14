@@ -31,6 +31,8 @@ service SessionService {
   rpc StartQuiz(StartQuizRequest) returns (StartQuizResponse);
   // クイズ中止（このクイズに関連する情報を破棄）
   rpc CancelCurrentQuiz(CancelCurrentQuizRequest) returns (CancelCurrentQuizResponse);
+  // クイズ回答設定
+  rpc SetQuizAnswer(SetQuizAnswerRequest) returns (SetQuizAnswerResponse);
   // クイズ結果表示
   rpc ShowQuizResult(ShowQuizResultRequest) returns (ShowQuizResultResponse);
   // カバー表示
@@ -194,6 +196,19 @@ message CancelCurrentQuizRequest {
 
 // クイズ中止レスポンス
 message CancelCurrentQuizResponse {
+  // Empty
+}
+
+// クイズ回答設定リクエスト
+message SetQuizAnswerRequest {
+  // セッションID
+  string session_id = 1;
+  // クイズ正解データ
+  string correct_answer = 2;
+}
+
+// クイズ回答設定レスポンス
+message SetQuizAnswerResponse {
   // Empty
 }
 

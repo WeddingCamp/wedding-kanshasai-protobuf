@@ -149,8 +149,8 @@ message SetAnswerRequest {
   string participant_id = 1;
   // クイズID
   string quiz_id = 2;
-  // 回答データ
-  string answer = 3;
+  // クイズ正解データ
+  string correct_answer = 3;
   // 回答までの時間
   float time = 4;
 }
