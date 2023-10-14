@@ -38,18 +38,6 @@ enum MessageLevel {
   MESSAGE_LEVEL_ERROR = 3;
 }
 
-// イントロダクション種別
-enum IntroductionType {
-  // 未定義
-  INTRODUCTION_TYPE_UNSPECIFIED = 0;
-  // ようこそ
-  INTRODUCTION_TYPE_WELCOME = 1;
-  // ルール説明
-  INTRODUCTION_TYPE_RULE = 2;
-  // ロゴ
-  INTRODUCTION_TYPE_LOGO = 3;
-}
-
 // 参加者種別
 enum ParticipantType {
   // 未定義
@@ -58,4 +46,42 @@ enum ParticipantType {
   PARTICIPANT_TYPE_GROOM = 1;
   // 新婦側
   PARTICIPANT_TYPE_BRIDE = 2;
+}
+
+// 結果発表タイトル種別
+enum ResultType {
+  // 未定義
+  RESULT_TYPE_UNSPECIFIED = 0;
+  // 中間結果発表
+  RESULT_TYPE_INTERIM = 1;
+  // 最終結果発表
+  RESULT_TYPE_FINAL = 2;
+}
+
+// 結果発表タイトル種別
+enum ResultTitleType {
+  // 未定義
+  RESULT_TITLE_TYPE_UNSPECIFIED = 0;
+  // ブービー賞
+  RESULT_TITLE_TYPE_BOOBY = 1;
+  // ぴたり賞
+  RESULT_TITLE_TYPE_JUST = 2;
+  // 順位
+  RESULT_TITLE_TYPE_RANK = 3;
+  // 順位表示用ダミー1（と、言いたいところですが！）
+  RESULT_TITLE_TYPE_RANK_DUMMY_1 = 4;
+  // 順位表示用ダミー2（と思いきや！！）
+  RESULT_TITLE_TYPE_RANK_DUMMY_2 = 5;
+}
+
+// 結果発表ランキング種別
+enum ResultRankingType {
+  // 未定義
+  RESULT_RANKING_TYPE_UNSPECIFIED = 0;
+  // ブービー賞
+  RESULT_RANKING_TYPE_BOOBY = 1;
+  // ぴたり賞
+  RESULT_RANKING_TYPE_JUST = 2;
+  // 順位
+  RESULT_RANKING_TYPE_RANK = 3;
 }

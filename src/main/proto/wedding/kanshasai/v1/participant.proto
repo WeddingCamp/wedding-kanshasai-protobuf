@@ -46,7 +46,7 @@ message CreateParticipantResponse {
   // 参加者名
   string name = 3;
   // 画像URL
-  optional string image_url = 4;
+  string image_url = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
 }
@@ -66,7 +66,7 @@ message GetParticipantResponse {
   // 参加者名
   string name = 3;
   // 画像URL
-  optional string image_url = 4;
+  string image_url = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
 }
@@ -94,7 +94,7 @@ message UpdateParticipantResponse {
   // 参加者名
   string name = 3;
   // 画像URL
-  optional string image_url = 4;
+  string image_url = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
 }
@@ -118,7 +118,7 @@ message ListParticipantsResponse {
     // 参加者名
     string name = 3;
     // 画像URL
-    optional string image_url = 4;
+    string image_url = 4;
     // 参加者種別
     ParticipantType participant_type = 5;
     // 接続済みかどうか
@@ -149,8 +149,8 @@ message SetAnswerRequest {
   string participant_id = 1;
   // クイズID
   string quiz_id = 2;
-  // 回答データ
-  string answer = 3;
+  // クイズ正解データ
+  string correct_answer = 3;
   // 回答までの時間
   float time = 4;
 }

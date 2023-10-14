@@ -31,12 +31,22 @@ service SessionService {
   rpc StartQuiz(StartQuizRequest) returns (StartQuizResponse);
   // クイズ中止（このクイズに関連する情報を破棄）
   rpc CancelCurrentQuiz(CancelCurrentQuizRequest) returns (CancelCurrentQuizResponse);
+  // クイズ回答設定
+  rpc SetQuizAnswer(SetQuizAnswerRequest) returns (SetQuizAnswerResponse);
   // クイズ結果表示
   rpc ShowQuizResult(ShowQuizResultRequest) returns (ShowQuizResultResponse);
   // カバー表示
   rpc SetCover(SetCoverRequest) returns (SetCoverResponse);
-  // 結果表示
-  rpc ShowSessionResult(ShowSessionResultRequest) returns (ShowSessionResultResponse);
+  // 結果発表開始
+  rpc StartSessionResult(StartSessionResultRequest) returns (StartSessionResultResponse);
+  // 結果発表タイトル表示
+  rpc ShowSessionResultTitle(ShowSessionResultTitleRequest) returns (ShowSessionResultTitleResponse);
+  // 次の結果発表表示
+  rpc ShowNextSessionResultRanking(ShowNextSessionResultRankingRequest) returns (ShowNextSessionResultRankingResponse);
+  // 前の結果発表表示
+  rpc ShowBackSessionResultRanking(ShowBackSessionResultRankingRequest) returns (ShowBackSessionResultRankingResponse);
+  // 結果発表ランキング表示
+  rpc ShowSessionResultRanking(ShowSessionResultRankingRequest) returns (ShowSessionResultRankingResponse);
   // クイズ終了
   rpc FinishQuiz(FinishQuizRequest) returns (FinishQuizResponse);
   // セッション終了
@@ -123,8 +133,8 @@ message ListSessionQuizzesResponse {
 message SetIntroductionRequest {
   // セッションID
   string session_id = 1;
-  // イントロダクション種別
-  IntroductionType introduction_type = 2;
+  // イントロダクションID
+  int32 introduction_id = 2;
 }
 
 // イントロダクション選択レスポンス
@@ -189,6 +199,19 @@ message CancelCurrentQuizResponse {
   // Empty
 }
 
+// クイズ回答設定リクエスト
+message SetQuizAnswerRequest {
+  // セッションID
+  string session_id = 1;
+  // クイズ正解データ
+  string correct_answer = 2;
+}
+
+// クイズ回答設定レスポンス
+message SetQuizAnswerResponse {
+  // Empty
+}
+
 // クイズ結果種別
 enum QuizResultType {
   // 未定義
@@ -227,26 +250,76 @@ message SetCoverResponse {
   // Empty
 }
 
-// セッション結果種別
-enum SessionResultType {
-  // 未定義
-  SESSION_RESULT_TYPE_UNSPECIFIED = 0;
-  // スコア一覧
-  SESSION_RESULT_TYPE_SCORE_LIST = 1;
-  // 勝者
-  SESSION_RESULT_TYPE_WINNER = 2;
-}
-
-// 結果画面表示リクエスト
-message ShowSessionResultRequest {
+// 結果画面開始リクエスト
+message StartSessionResultRequest {
   // セッションID
   string session_id = 1;
   // 結果画面種別
-  SessionResultType session_result_screen_type = 2;
+  ResultType result_type = 2;
 }
 
-// 結果画面表示レスポンス
-message ShowSessionResultResponse {
+// 結果画面開始レスポンス
+message StartSessionResultResponse {
+  // Empty
+}
+
+// 結果画面タイトル表示リクエスト
+message ShowSessionResultTitleRequest {
+  // セッションID
+  string session_id = 1;
+  // 結果画面種別
+  ResultTitleType result_title_type = 2;
+  // 順位（RESULT_RANKING_TYPE_RANK系のみ）
+  optional int32 rank = 3;
+}
+
+// 結果画面タイトル表示レスポンス
+message ShowSessionResultTitleResponse {
+  // Empty
+}
+
+// 次の結果画面表示リクエスト
+message ShowNextSessionResultRankingRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// 次の結果画面表示レスポンス
+message ShowNextSessionResultRankingResponse {
+  // Empty
+}
+
+// 前の結果画面表示リクエスト
+message ShowBackSessionResultRankingRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// 前の結果画面ランキング表示レスポンス
+message ShowBackSessionResultRankingResponse {
+  // Empty
+}
+
+// 結果画面ランキング表示リクエスト
+message ShowSessionResultRankingRequest {
+  // セッションID
+  string session_id = 1;
+  // 結果発表ランキング種別
+  ResultRankingType result_ranking_type = 2;
+  // 開始位置
+  int32 start_position = 3;
+  // 終了位置
+  int32 end_position = 4;
+  // 何個表示しておくか
+  int32 pre_display_count = 5;
+  // 何個表示するか
+  int32 display_count = 6;
+  // 強調表示する位置の配列
+  repeated int32 emphasize_positions = 7;
+}
+
+// 結果画面ランキング表示レスポンス
+message ShowSessionResultRankingResponse {
   // Empty
 }
 
