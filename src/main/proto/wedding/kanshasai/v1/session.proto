@@ -40,9 +40,9 @@ service SessionService {
   // 結果発表タイトル表示
   rpc ShowSessionResultTitle(ShowSessionResultTitleRequest) returns (ShowSessionResultTitleResponse);
   // 次の結果発表表示
-  rpc ShowNextSessionResultRanking(ShowNextSessionResultRequest) returns (ShowNextSessionResultResponse);
+  rpc ShowNextSessionResultRanking(ShowNextSessionResultRankingRequest) returns (ShowNextSessionResultRankingResponse);
   // 前の結果発表表示
-  rpc ShowBackSessionResultRanking(ShowBackSessionResultRequest) returns (ShowBackSessionResultResponse);
+  rpc ShowBackSessionResultRanking(ShowBackSessionResultRankingRequest) returns (ShowBackSessionResultRankingResponse);
   // 結果発表ランキング表示
   rpc ShowSessionResultRanking(ShowSessionResultRankingRequest) returns (ShowSessionResultRankingResponse);
   // クイズ終了
@@ -264,24 +264,24 @@ message ShowSessionResultTitleResponse {
 }
 
 // 次の結果画面表示リクエスト
-message ShowNextSessionResultRequest {
+message ShowNextSessionResultRankingRequest {
   // セッションID
   string session_id = 1;
 }
 
 // 次の結果画面表示レスポンス
-message ShowNextSessionResultResponse {
+message ShowNextSessionResultRankingResponse {
   // Empty
 }
 
 // 前の結果画面表示リクエスト
-message ShowBackSessionResultRequest {
+message ShowBackSessionResultRankingRequest {
   // セッションID
   string session_id = 1;
 }
 
 // 前の結果画面ランキング表示レスポンス
-message ShowBackSessionResultResponse {
+message ShowBackSessionResultRankingResponse {
   // Empty
 }
 
