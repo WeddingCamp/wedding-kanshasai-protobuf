@@ -153,7 +153,7 @@ message StreamEventResponse {
       // 参加者名
       string participant_name = 2;
       // スコア
-      string score = 3;
+      int32 score = 3;
       // 秒数
       float time = 4;
     }
@@ -180,7 +180,7 @@ message StreamEventResponse {
       // 参加者名
       string participant_name = 2;
       // スコア
-      string score = 3;
+      int32 score = 3;
       // 秒数
       float time = 4;
       // 強調フラグ
