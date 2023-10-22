@@ -204,7 +204,7 @@ message StreamEventResponse {
     // 順位
     int32 rank = 1;
     // 結果発表ランキング種別
-    ResultRankingType result_ranking_type = 2;
+    ResultPresentType result_present_type = 2;
   }
 
   // イベント種別
