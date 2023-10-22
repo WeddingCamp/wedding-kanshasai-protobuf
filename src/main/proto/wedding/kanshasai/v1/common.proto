@@ -87,3 +87,17 @@ enum ResultRankingType {
   // 順位
   RESULT_RANKING_TYPE_RANK = 3;
 }
+
+// 結果発表プレゼント種別
+enum ResultPresentType {
+  // 未定義
+  RESULT_PRESENT_TYPE_UNSPECIFIED = 0;
+  // ブービー賞
+  RESULT_PRESENT_TYPE_BOOBY = 1;
+  // ぴたり賞
+  RESULT_PRESENT_TYPE_JUST = 2;
+  // 順位
+  RESULT_PRESENT_TYPE_RANK = 3;
+  // 4位7位
+  RESULT_PRESENT_TYPE_4_7 = 4;
+}
