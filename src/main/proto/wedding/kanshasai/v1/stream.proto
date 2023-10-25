@@ -98,6 +98,10 @@ message StreamEventResponse {
   message IntroductionEvent {
     // イントロダクションID
     int32 introduction_id = 1;
+    // 最初のイントロダクションフラグ
+    bool is_first = 2;
+    // 最後のイントロダクションフラグ
+    bool is_last = 3;
   }
 
   // 現在状態
