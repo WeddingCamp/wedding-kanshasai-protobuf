@@ -59,9 +59,10 @@ message StreamEventResponse {
     string body = 2;
     // クイズ種別
     QuizType quiz_type = 3;
-
     // クイズ選択肢の配列
     repeated Choice choices = 4;
+    // 何問目
+    int32 quiz_number = 5;
   }
 
   // 早押しランキングイベントBody
