@@ -19,8 +19,10 @@ service SessionService {
   rpc ListSessions(ListSessionsRequest) returns (ListSessionsResponse);
   // セッションに紐づいたクイズ一覧
   rpc ListSessionQuizzes(ListSessionQuizzesRequest) returns (ListSessionQuizzesResponse);
-  // イントロダクション選択
-  rpc SetIntroduction(SetIntroductionRequest) returns (SetIntroductionResponse);
+  // イントロダクション次へ
+  rpc NextIntroduction(NextIntroductionRequest) returns (NextIntroductionResponse);
+  // イントロダクション前へ
+  rpc BackIntroduction(BackIntroductionRequest) returns (BackIntroductionResponse);
   // イントロダクション完了
   rpc FinishIntroduction(FinishIntroductionRequest) returns (FinishIntroductionResponse);
   // クイズ選択
@@ -129,16 +131,25 @@ message ListSessionQuizzesResponse {
   repeated SessionQuiz session_quizzes = 1;
 }
 
-// イントロダクション選択リクエスト
-message SetIntroductionRequest {
+// イントロダクション次へリクエスト
+message NextIntroductionRequest {
   // セッションID
   string session_id = 1;
-  // イントロダクションID
-  int32 introduction_id = 2;
 }
 
-// イントロダクション選択レスポンス
-message SetIntroductionResponse {
+// イントロダクション次へレスポンス
+message NextIntroductionResponse {
+  // Empty
+}
+
+// イントロダクション前へリクエスト
+message BackIntroductionRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// イントロダクション前へレスポンス
+message BackIntroductionResponse {
   // Empty
 }
 
