@@ -59,9 +59,10 @@ message StreamEventResponse {
     string body = 2;
     // クイズ種別
     QuizType quiz_type = 3;
-
     // クイズ選択肢の配列
     repeated Choice choices = 4;
+    // 何問目
+    int32 quiz_number = 5;
   }
 
   // 早押しランキングイベントBody
@@ -98,6 +99,10 @@ message StreamEventResponse {
   message IntroductionEvent {
     // イントロダクションID
     int32 introduction_id = 1;
+    // 最初のイントロダクションフラグ
+    bool is_first = 2;
+    // 最後のイントロダクションフラグ
+    bool is_last = 3;
   }
 
   // 現在状態
@@ -207,6 +212,14 @@ message StreamEventResponse {
     ResultPresentType result_present_type = 2;
   }
 
+  // プロフィールオブジェクト
+  message Profile {
+    // 参加者名
+    string participant_name = 1;
+    // 参加者画像URL
+    string participant_image_url = 2;
+  }
+
   // イベント種別
   EventType event_type = 1;
   // 正答数（StreamType = STREAM_TYPE_PARTICIPANTの際のみ）
@@ -241,6 +254,9 @@ message StreamEventResponse {
   ResultRanking result_ranking = 20;
   // 結果発表プレゼント（RESULT_PRESENT）
   ResultPresent result_present = 21;
+
+  // プロフィール（SHOW_PROFILE）
+  Profile profile = 22;
 }
 
 // ストリーム種別
@@ -262,6 +278,8 @@ enum EventType {
 
   // イントロダクション表示イベント
   EVENT_TYPE_INTRODUCTION = 10;
+  // プロフィール表示イベント
+  EVENT_TYPE_SHOW_PROFILE = 11;
 
   // クイズ情報イベント（クイズや選択肢画像などをプリロードするためのイベント）
   EVENT_TYPE_PRE_QUIZ = 20;
