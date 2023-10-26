@@ -3,7 +3,6 @@ syntax = "proto3";
 package wedding.kanshasai.v1;
 
 import "wedding/kanshasai/v1/common.proto";
-import "wedding/kanshasai/v1/quiz.proto";
 
 option csharp_namespace = "WeddingCamp.ProtoBuf";
 option java_multiple_files = true;
@@ -261,89 +260,4 @@ message StreamEventResponse {
 
   // プロフィール（SHOW_PROFILE）
   Profile profile = 22;
-}
-
-// ストリーム種別
-enum StreamType {
-  // 未定義
-  STREAM_TYPE_UNSPECIFIED = 0;
-  // スクリーン
-  STREAM_TYPE_SCREEN = 1;
-  // 参加者
-  STREAM_TYPE_PARTICIPANT = 2;
-  // 司会者
-  STREAM_TYPE_MANAGER = 3;
-}
-
-// イベント種別
-enum EventType {
-  // 未定義
-  EVENT_TYPE_UNSPECIFIED = 0;
-
-  // イントロダクション表示イベント
-  EVENT_TYPE_INTRODUCTION = 10;
-  // プロフィール表示イベント
-  EVENT_TYPE_SHOW_PROFILE = 11;
-
-  // クイズ情報イベント（クイズや選択肢画像などをプリロードするためのイベント）
-  EVENT_TYPE_PRE_QUIZ = 20;
-  // クイズ表示イベント（PreQuizで取得できていなくても動かせるよう全データを載せる）
-  EVENT_TYPE_SHOW_QUIZ = 21;
-  // クイズ回答開始イベント
-  EVENT_TYPE_START_QUIZ = 22;
-  // 締め切りイベント
-  EVENT_TYPE_QUIZ_TIME_UP = 23;
-  // クイズ回答数イベント
-  EVENT_TYPE_QUIZ_ANSWER_LIST = 24;
-  // クイズ結果イベント
-  EVENT_TYPE_QUIZ_RESULT = 25;
-  // 早押しランキングイベント
-  EVENT_TYPE_QUIZ_SPEED_RANKING = 26;
-  // 参加者情報更新イベント
-  EVENT_TYPE_UPDATE_PARTICIPANT = 27;
-  // 回答情報更新イベント
-  EVENT_TYPE_UPDATE_ANSWER = 28;
-  // クイズキャンセルイベント
-  EVENT_TYPE_CANCEL_QUIZ = 29;
-
-  // 中間結果表示イベント
-  EVENT_TYPE_SESSION_INTERIM_RESULT = 30;
-  // 最終結果表示イベント
-  EVENT_TYPE_SESSION_FINAL_RESULT = 31;
-  // 勝者イベント（参加者用）
-  EVENT_TYPE_WINNER = 32;
-
-  // 終了イベント
-  EVENT_TYPE_FINISH = 40;
-  // 結果発表タイトルイベント
-  EVENT_TYPE_RESULT_TITLE = 41;
-  // 結果発表情報イベント（STREAM_TYPE_MANAGER）
-  EVENT_TYPE_RESULT_INFO = 42;
-  // 結果発表ランキングタイトルイベント
-  EVENT_TYPE_RESULT_RANKING_TITLE = 43;
-  // 結果発表ランキング表示
-  EVENT_TYPE_RESULT_RANKING = 44;
-  // 結果発表プレゼント表示
-  EVENT_TYPE_RESULT_PRESENT = 45;
-
-  // メッセージイベント
-  EVENT_TYPE_MESSAGE = 50;
-  // カバーイベント
-  EVENT_TYPE_COVER = 98;
-  // 現在状態イベント
-  EVENT_TYPE_CURRENT_STATE = 99;
-  // 現在状態イベント（STREAM_TYPE_MANAGER/接続時）
-  EVENT_TYPE_FULL_CURRENT_STATE = 100;
-}
-
-// ゲームの状態を表すステート
-enum SimpleSessionState {
-  // 未定義
-  SIMPLE_SESSION_STATE_UNSPECIFIED = 0;
-  // 開始前状態
-  SIMPLE_SESSION_STATE_BEFORE_START = 1;
-  // ゲーム中状態
-  SIMPLE_SESSION_STATE_DURING_THE_GAME = 2;
-  // 終了済状態
-  SIMPLE_SESSION_STATE_FINISHED = 3;
 }

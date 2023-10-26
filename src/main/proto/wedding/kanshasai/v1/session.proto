@@ -3,7 +3,6 @@ syntax = "proto3";
 package wedding.kanshasai.v1;
 
 import "wedding/kanshasai/v1/common.proto";
-import "wedding/kanshasai/v1/quiz.proto";
 
 option csharp_namespace = "WeddingCamp.ProtoBuf";
 option java_multiple_files = true;
@@ -53,6 +52,8 @@ service SessionService {
   rpc FinishQuiz(FinishQuizRequest) returns (FinishQuizResponse);
   // セッション終了
   rpc FinishSession(FinishSessionRequest) returns (FinishSessionResponse);
+  // セッション情報取得
+  rpc GetSessionStatus(GetSessionStatusRequest) returns (GetSessionStatusResponse);
 }
 
 // セッション作成リクエスト
@@ -223,18 +224,6 @@ message SetQuizAnswerResponse {
   // Empty
 }
 
-// クイズ結果種別
-enum QuizResultType {
-  // 未定義
-  QUIZ_RESULT_TYPE_UNSPECIFIED = 0;
-  // 投票数
-  QUIZ_RESULT_TYPE_VOTE_LIST = 1;
-  // 結果
-  QUIZ_RESULT_TYPE_RESULT = 2;
-  // 早押しランキング
-  QUIZ_RESULT_TYPE_FASTEST_RANKING = 3;
-}
-
 // クイズ結果表示リクエスト
 message ShowQuizResultRequest {
   // セッションID
@@ -354,4 +343,16 @@ message FinishSessionRequest {
 // セッション終了レスポンス
 message FinishSessionResponse {
   // Empty
+}
+
+// セッション情報取得リクエスト
+message GetSessionStatusRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// セッション情報取得レスポンス
+message GetSessionStatusResponse {
+  // ゲームの進行状態
+  SimpleSessionState simple_session_state = 1;
 }
