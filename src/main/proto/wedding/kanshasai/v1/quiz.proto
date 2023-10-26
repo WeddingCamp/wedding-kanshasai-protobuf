@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package wedding.kanshasai.v1;
 
+import "wedding/kanshasai/v1/common.proto";
+
 option csharp_namespace = "WeddingCamp.ProtoBuf";
 option java_multiple_files = true;
 option java_outer_classname = "QuizProto";
