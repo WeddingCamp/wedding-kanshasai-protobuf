@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package wedding.kanshasai.v1;
 
+import "wedding/kanshasai/v1/common.proto";
+
 option csharp_namespace = "WeddingCamp.ProtoBuf";
 option java_multiple_files = true;
 option java_outer_classname = "QuizProto";
@@ -17,18 +19,6 @@ service QuizService {
   rpc UpdateQuiz(UpdateQuizRequest) returns (UpdateQuizResponse);
   // クイズ一覧取得API
   rpc ListQuizzes(ListQuizzesRequest) returns (ListQuizzesResponse);
-}
-
-// クイズ種別
-enum QuizType {
-  // 未定義
-  QUIZ_TYPE_UNSPECIFIED = 0;
-  // 四択クイズ
-  QUIZ_TYPE_FOUR_CHOICES_QUIZ = 1;
-  // 画像並び替えクイズ
-  QUIZ_TYPE_SORT_IMAGE_QUIZ = 2;
-  // リアルタイムクイズ
-  QUIZ_TYPE_REALTIME_FOUR_CHOICE_QUIZ = 3;
 }
 
 // クイズ作成リクエスト
