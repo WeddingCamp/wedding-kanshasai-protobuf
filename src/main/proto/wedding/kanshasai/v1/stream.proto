@@ -76,6 +76,8 @@ message StreamEventResponse {
       string participant_image_url = 2;
       // タイム
       float time = 3;
+      // 順位
+      int32 rank = 4;
     }
 
     // 参加者の回答時間の配列
