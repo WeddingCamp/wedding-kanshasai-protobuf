@@ -52,7 +52,7 @@ message StreamEventResponse {
       // 選択フラグ（QUIZ_RESULTかつSTREAM_TYPE_PARTICIPANTのみ）
       optional bool is_selected_choice = 5;
       // 経過時間（QUIZ_PLAYINGかつSTREAM_TYPE_PARTICIPANTのみ）
-      optional float elapsedTime = 6;
+      optional float elapsed_time = 6;
     }
 
     // クイズID
