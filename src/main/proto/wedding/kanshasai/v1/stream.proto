@@ -193,6 +193,8 @@ message StreamEventResponse {
       float time = 4;
       // 強調フラグ
       bool is_emphasis = 5;
+      // 隠しフラグ
+      bool is_hidden = 6;
     }
 
     // 参加者のスコアの配列
