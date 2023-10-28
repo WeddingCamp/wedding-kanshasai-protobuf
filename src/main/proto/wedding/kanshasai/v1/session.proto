@@ -217,6 +217,8 @@ message SetQuizAnswerRequest {
   string session_id = 1;
   // クイズ正解データ
   string correct_answer = 2;
+  // クイズID
+  string quiz_id = 3;
 }
 
 // クイズ回答設定レスポンス
