@@ -22,6 +22,8 @@ service SessionService {
   rpc NextIntroduction(NextIntroductionRequest) returns (NextIntroductionResponse);
   // イントロダクション前へ
   rpc BackIntroduction(BackIntroductionRequest) returns (BackIntroductionResponse);
+  // プロフィール表示
+  rpc ShowProfile(ShowProfileRequest) returns (ShowProfileResponse);
   // イントロダクション完了
   rpc FinishIntroduction(FinishIntroductionRequest) returns (FinishIntroductionResponse);
   // クイズ選択
@@ -151,6 +153,17 @@ message BackIntroductionRequest {
 
 // イントロダクション前へレスポンス
 message BackIntroductionResponse {
+  // Empty
+}
+
+// プロフィール表示リクエスト
+message ShowProfileRequest {
+  // セッションID
+  string session_id = 1;
+}
+
+// プロフィール表示レスポンス
+message ShowProfileResponse {
   // Empty
 }
 
