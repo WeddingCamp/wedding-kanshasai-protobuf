@@ -35,6 +35,8 @@ message CreateParticipantRequest {
   optional string image_id = 3;
   // 参加者種別
   ParticipantType participant_type = 4;
+  // 参加者名ルビ
+  optional string name_ruby = 5;
 }
 
 // 参加者作成レスポンス
@@ -49,6 +51,8 @@ message CreateParticipantResponse {
   string image_url = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
+  // 参加者名ルビ
+  string name_ruby = 6;
 }
 
 // 参加者取得リクエスト
@@ -69,6 +73,8 @@ message GetParticipantResponse {
   string image_url = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
+  // 参加者名ルビ
+  string name_ruby = 6;
 }
 
 // 参加者更新リクエスト
@@ -83,6 +89,8 @@ message UpdateParticipantRequest {
   optional string image_id = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
+  // 参加者名ルビ
+  optional string name_ruby = 6;
 }
 
 // 参加者更新レスポンス
@@ -97,6 +105,8 @@ message UpdateParticipantResponse {
   string image_url = 4;
   // 参加者種別
   ParticipantType participant_type = 5;
+  // 参加者名ルビ
+  string name_ruby = 6;
 }
 
 // 参加者一覧リクエスト
@@ -123,6 +133,8 @@ message ListParticipantsResponse {
     ParticipantType participant_type = 5;
     // 接続済みかどうか
     bool is_connected = 6;
+    // 参加者名ルビ
+    string name_ruby = 7;
   }
 
   // 参加者の配列
