@@ -182,7 +182,7 @@ message StreamEventResponse {
     // 順位
     int32 rank = 2;
     // 実際の結果発表ランキングタイトル種別(ダミー時用)
-    ResultTitleType actualResultTitleType = 3;
+    ResultTitleType actual_result_title_type = 3;
   }
 
   // 結果発表ランキングオブジェクト
