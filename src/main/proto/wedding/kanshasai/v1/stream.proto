@@ -132,6 +132,8 @@ message StreamEventResponse {
     ParticipantType participant_type = 5;
     // 接続済みかどうか
     bool is_connected = 6;
+    // 回答済みかどうか
+    bool is_answered = 7;
   }
 
   // 回答情報オブジェクト
