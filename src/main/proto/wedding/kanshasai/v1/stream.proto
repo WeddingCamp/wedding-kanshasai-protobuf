@@ -78,6 +78,8 @@ message StreamEventResponse {
       float time = 3;
       // 順位
       int32 rank = 4;
+      // 参加者名ルビ
+      string participant_name_ruby = 5;
     }
 
     // 参加者の回答時間の配列
@@ -134,6 +136,8 @@ message StreamEventResponse {
     bool is_connected = 6;
     // 回答済みかどうか
     bool is_answered = 7;
+    // 参加者名ルビ
+    string name_ruby = 8;
   }
 
   // 回答情報オブジェクト
@@ -148,6 +152,8 @@ message StreamEventResponse {
     string participant_image_url = 4;
     // 回答時間
     float time = 5;
+    // 参加者名ルビ
+    string participant_name_ruby = 6;
   }
 
   // 結果発表タイトルオブジェクト
@@ -168,6 +174,8 @@ message StreamEventResponse {
       int32 score = 3;
       // 秒数
       float time = 4;
+      // 参加者名ルビ
+      string participant_name_ruby = 5;
     }
     // 参加者のスコアの配列
     repeated ParticipantSessionScore participant_session_scores = 1;
@@ -201,6 +209,8 @@ message StreamEventResponse {
       bool is_emphasis = 5;
       // 隠しフラグ
       bool is_hidden = 6;
+      // 参加者名ルビ
+      string participant_name_ruby = 7;
     }
 
     // 参加者のスコアの配列
@@ -229,6 +239,8 @@ message StreamEventResponse {
     string participant_name = 1;
     // 参加者画像URL
     string participant_image_url = 2;
+    // 参加者名ルビ
+    string participant_name_ruby = 3;
   }
 
   // イベント種別
