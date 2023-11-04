@@ -370,4 +370,6 @@ message GetSessionStatusRequest {
 message GetSessionStatusResponse {
   // ゲームの進行状態
   SimpleSessionState simple_session_state = 1;
+  // QRコードの画像URL
+  string qr_code_image_url = 2;
 }
